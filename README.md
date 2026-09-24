@@ -6,6 +6,10 @@ und landest auf der Planke mit der richtigen Übersetzung.
 
 TypeScript + Phaser 3, gebaut mit Vite. Design-Auflösung 720×1280 (Hochformat).
 
+**Online spielen:** https://stev2020.github.io/mustikka-hyppy/ (am Handy im Browser öffnen,
+Chrome empfohlen). Jeder Push auf `main` baut und veröffentlicht die Seite automatisch
+über GitHub Actions (`.github/workflows/pages.yml`).
+
 ## Starten
 
 Voraussetzung: Node.js 20.19+ oder 22.12+.
