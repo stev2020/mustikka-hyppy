@@ -26,9 +26,15 @@ export function toLocale(lang: string): string {
   return LOCALES[lang] ?? lang;
 }
 
+/** iOS-Spaßstimmen (Eloquence), gibt es in vielen Sprachen – klingen roboterhaft */
+const NOVELTY = /^(eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley)\b/i;
+/** bekannt gute Stimmen: Apple (Satu, Onni), Microsoft (Noora, Harri, Selma), Google */
+const GOOD = /\b(satu|onni|noora|harri|selma|google)\b/i;
+
 export class Speech {
   private voice?: SpeechSynthesisVoice;
   private listeners: (() => void)[] = [];
+  private unlocked = false;
 
   constructor(
     public enabled: boolean,
@@ -42,6 +48,29 @@ export class Speech {
       };
       pick();
       window.speechSynthesis.addEventListener?.('voiceschanged', pick);
+      // iOS/Safari: Stimmen kommen oft verspätet, und "voiceschanged" feuert nicht immer
+      for (const ms of [250, 1000, 2500, 5000]) setTimeout(() => !this.voice && pick(), ms);
+    }
+  }
+
+  /**
+   * iOS spricht erst, nachdem die Sprachausgabe einmal innerhalb einer Berührung
+   * benutzt wurde. Deshalb beim ersten Antippen eine stumme Äußerung abspielen.
+   */
+  unlock(): void {
+    if (this.unlocked || this.custom || !this.supported) return;
+    this.unlocked = true;
+    try {
+      if (!this.voice) this.voice = this.findVoice();
+      const u = new SpeechSynthesisUtterance(' ');
+      u.volume = 0;
+      if (this.voice) {
+        u.voice = this.voice;
+        u.lang = this.voice.lang;
+      }
+      window.speechSynthesis.speak(u);
+    } catch {
+      /* ignorieren */
     }
   }
 
@@ -77,9 +106,14 @@ export class Speech {
     // genau die Sprache (fi), nicht nur gleicher Anfang (fil = Filipino!)
     const matches = voices.filter((v) => norm(v).split('-')[0] === base);
     if (!matches.length) return undefined;
-    // Rangfolge: passende Region, "Natural"-Stimmen (Edge), Online vor alten lokalen Stimmen
+    // Rangfolge: passende Region, hochwertige Stimmen ("Natural" in Edge, "Premium"/"Enhanced"
+    // auf iOS), bekannte gute Stimmen; iOS-Spaßstimmen (Eddy, Grandma …) nur als letzte Wahl
     const score = (v: SpeechSynthesisVoice) =>
-      (norm(v) === loc ? 4 : 0) + (/natural/i.test(v.name) ? 3 : 0) + (/online|neural|google/i.test(v.name) ? 1 : 0);
+      (norm(v) === loc ? 4 : 0) +
+      (/natural|premium|enhanced|erweitert/i.test(v.name) ? 3 : 0) +
+      (GOOD.test(v.name) ? 2 : 0) +
+      (/online|neural/i.test(v.name) ? 1 : 0) -
+      (NOVELTY.test(v.name) ? 10 : 0);
     const best = [...matches].sort((a, b) => score(b) - score(a))[0];
     console.info('[Mustikka Hyppy] Stimme für', this.lang, '→', best.name, `(${best.lang})`);
     return best;
@@ -88,6 +122,15 @@ export class Speech {
   /** Name der gewählten Stimme (für die Anzeige) */
   get voiceName(): string | undefined {
     return this.custom ? 'eigene Sprachausgabe' : this.voice?.name;
+  }
+
+  /** kurzer Stimmenname für Knöpfe, z. B. "Satu" statt "Satu (Premium)" oder "Microsoft Noora Online (Natural) - Finnish (Finland)" */
+  get voiceLabel(): string | undefined {
+    const n = this.voiceName;
+    if (!n || this.custom) return n;
+    const ms = /Microsoft (\w+)/.exec(n);
+    if (ms) return ms[1];
+    return n.replace(/\s*[(\-–].*$/, '').trim() || n;
   }
 
   speak(text: string): void {

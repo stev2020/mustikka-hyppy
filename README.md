@@ -47,7 +47,16 @@ wird das Spielfeld neu eingepasst (`src/game/orientation.ts`). Am PC gibt es kei
 
 Die **Aussprache** braucht einen Browser mit Sprachausgabe: Chrome auf Android nutzt
 die Google-Stimmen des Handys. DuckDuckGo und manche andere Browser bieten keine Stimmen
-an, dort steht „Aussprache: keine Stimme“.
+an, dort steht „Aussprache: keine Stimme“. Der Schalter zeigt den Namen der gewählten
+Stimme, z. B. „Aussprache: Satu“. Es werden nur Stimmen genommen, deren Sprache genau
+Finnisch ist.
+
+Auf **iPhone/iPad** (alle Browser nutzen dort Safari-Technik) ist die finnische Stimme
+„Satu“ dabei. Die iOS-Spaßstimmen wie „Eddy“ oder „Grandma“ werden nur genommen, wenn es
+sonst keine gibt. Eine bessere Qualität gibt es unter Einstellungen → Bedienungshilfen →
+Gesprochene Inhalte → Stimmen → Finnisch → „Satu (Premium)“ laden. Die wird dann
+automatisch bevorzugt. iOS spricht erst nach der ersten Berührung, deshalb schaltet das
+Spiel die Sprachausgabe beim ersten Antippen stumm frei.
 
 Nützliche URL-Parameter für das Testspiel:
 

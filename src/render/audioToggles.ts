@@ -11,7 +11,9 @@ export function audioToggles(scene: Phaser.Scene, x: number, y: number, width: n
     const s = getCtx(scene).speech;
     if (!s.supported) return 'Aussprache: –';
     if (!s.enabled) return 'Aussprache: aus';
-    return s.hasVoice ? 'Aussprache: an' : 'Aussprache: keine Stimme';
+    if (!s.hasVoice) return 'Aussprache: keine Stimme';
+    // Name der Stimme zeigen, damit man sieht, welche gewählt ist (z. B. „Satu“)
+    return s.voiceLabel ? `Aussprache: ${s.voiceLabel}` : 'Aussprache: an';
   };
 
   const sound = makeButton(scene, x - width / 2 + bw / 2, y, bw, 54, soundLabel(), () => {

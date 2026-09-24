@@ -94,8 +94,13 @@ export function createMustikkaHyppy(opts: MustikkaHyppyOptions): MustikkaHyppyIn
   if (settings.allowImport) activateList(ctx, ctx.lists.getActive());
 
   // Audio darf erst nach einer Nutzeraktion starten
-  const unlock = () => ctx.sfx.unlock();
-  parentEl.addEventListener('pointerdown', unlock);
+  const unlock = () => {
+    ctx.sfx.unlock();
+    ctx.speech.unlock();
+  };
+  // iOS zählt erst das Loslassen (touchend/click) als Nutzeraktion
+  const unlockEvents = ['pointerdown', 'pointerup', 'touchend', 'click'] as const;
+  for (const ev of unlockEvents) parentEl.addEventListener(ev, unlock);
   window.addEventListener('keydown', unlock);
 
   // HiDPI: intern mit höherer Auflösung rendern, Kamera zoomt auf Design-Koordinaten
@@ -163,7 +168,7 @@ export function createMustikkaHyppy(opts: MustikkaHyppyOptions): MustikkaHyppyIn
     },
     lastResult: () => ctx.lastResult,
     destroy() {
-      parentEl.removeEventListener('pointerdown', unlock);
+      for (const ev of unlockEvents) parentEl.removeEventListener(ev, unlock);
       window.removeEventListener('keydown', unlock);
       removeOrientationGuard();
       ctx.speech.cancel();
