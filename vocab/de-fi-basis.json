@@ -1,0 +1,779 @@
+{
+  "meta": {
+    "title": "Finnisch Grundwortschatz (Beispiel)",
+    "sourceLang": "de",
+    "targetLang": "fi"
+  },
+  "entries": [
+    {
+      "id": "koira-nom",
+      "source": "der Hund",
+      "target": "koira",
+      "lemma": "koira",
+      "form": "nominativ",
+      "category": "tiere",
+      "level": 1,
+      "distractors": [
+        "kissa",
+        "koiran",
+        "koirat"
+      ]
+    },
+    {
+      "id": "kissa-nom",
+      "source": "die Katze",
+      "target": "kissa",
+      "lemma": "kissa",
+      "form": "nominativ",
+      "category": "tiere",
+      "level": 1,
+      "distractors": [
+        "koira",
+        "kissan",
+        "kissat"
+      ]
+    },
+    {
+      "id": "lintu-nom",
+      "source": "der Vogel",
+      "target": "lintu",
+      "lemma": "lintu",
+      "form": "nominativ",
+      "category": "tiere",
+      "level": 1,
+      "distractors": [
+        "kala",
+        "linnun",
+        "linnut"
+      ]
+    },
+    {
+      "id": "kala-nom",
+      "source": "der Fisch",
+      "target": "kala",
+      "lemma": "kala",
+      "form": "nominativ",
+      "category": "tiere",
+      "level": 1,
+      "distractors": [
+        "lintu",
+        "kalan",
+        "kalat"
+      ]
+    },
+    {
+      "id": "karhu-nom",
+      "source": "der Bär",
+      "target": "karhu",
+      "lemma": "karhu",
+      "form": "nominativ",
+      "category": "tiere",
+      "level": 1,
+      "distractors": [
+        "hevonen",
+        "karhun",
+        "karhut"
+      ]
+    },
+    {
+      "id": "hevonen-nom",
+      "source": "das Pferd",
+      "target": "hevonen",
+      "lemma": "hevonen",
+      "form": "nominativ",
+      "category": "tiere",
+      "level": 1,
+      "distractors": [
+        "karhu",
+        "hevosen",
+        "hevoset"
+      ]
+    },
+    {
+      "id": "puu-nom",
+      "source": "der Baum",
+      "target": "puu",
+      "lemma": "puu",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "metsä",
+        "puun",
+        "puut"
+      ]
+    },
+    {
+      "id": "metsa-nom",
+      "source": "der Wald",
+      "target": "metsä",
+      "lemma": "metsä",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "puu",
+        "järvi",
+        "metsän"
+      ]
+    },
+    {
+      "id": "jarvi-nom",
+      "source": "der See",
+      "target": "järvi",
+      "lemma": "järvi",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "meri",
+        "joki",
+        "järven"
+      ]
+    },
+    {
+      "id": "lumi-nom",
+      "source": "der Schnee",
+      "target": "lumi",
+      "lemma": "lumi",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "jää",
+        "sade",
+        "lunta"
+      ]
+    },
+    {
+      "id": "aurinko-nom",
+      "source": "die Sonne",
+      "target": "aurinko",
+      "lemma": "aurinko",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "kuu",
+        "tähti",
+        "auringon"
+      ]
+    },
+    {
+      "id": "kuu-nom",
+      "source": "der Mond",
+      "target": "kuu",
+      "lemma": "kuu",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "aurinko",
+        "tähti",
+        "kuun"
+      ]
+    },
+    {
+      "id": "tahti-nom",
+      "source": "der Stern",
+      "target": "tähti",
+      "lemma": "tähti",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "kuu",
+        "taivas",
+        "tähdet"
+      ]
+    },
+    {
+      "id": "vuori-nom",
+      "source": "der Berg",
+      "target": "vuori",
+      "lemma": "vuori",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "tunturi",
+        "järvi",
+        "vuoret"
+      ]
+    },
+    {
+      "id": "vesi-nom",
+      "source": "das Wasser",
+      "target": "vesi",
+      "lemma": "vesi",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "maito",
+        "lumi",
+        "veden"
+      ]
+    },
+    {
+      "id": "mustikka-nom",
+      "source": "die Heidelbeere",
+      "target": "mustikka",
+      "lemma": "mustikka",
+      "form": "nominativ",
+      "category": "natur",
+      "level": 1,
+      "distractors": [
+        "puolukka",
+        "mansikka",
+        "mustikat"
+      ]
+    },
+    {
+      "id": "talo-nom",
+      "source": "das Haus",
+      "target": "talo",
+      "lemma": "talo",
+      "form": "nominativ",
+      "category": "haus",
+      "level": 1,
+      "distractors": [
+        "koti",
+        "talon",
+        "talot"
+      ]
+    },
+    {
+      "id": "ovi-nom",
+      "source": "die Tür",
+      "target": "ovi",
+      "lemma": "ovi",
+      "form": "nominativ",
+      "category": "haus",
+      "level": 1,
+      "distractors": [
+        "ikkuna",
+        "oven",
+        "ovet"
+      ]
+    },
+    {
+      "id": "ikkuna-nom",
+      "source": "das Fenster",
+      "target": "ikkuna",
+      "lemma": "ikkuna",
+      "form": "nominativ",
+      "category": "haus",
+      "level": 1,
+      "distractors": [
+        "ovi",
+        "ikkunan",
+        "ikkunat"
+      ]
+    },
+    {
+      "id": "poyta-nom",
+      "source": "der Tisch",
+      "target": "pöytä",
+      "lemma": "pöytä",
+      "form": "nominativ",
+      "category": "haus",
+      "level": 1,
+      "distractors": [
+        "tuoli",
+        "pöydän",
+        "pöydät"
+      ]
+    },
+    {
+      "id": "kirja-nom",
+      "source": "das Buch",
+      "target": "kirja",
+      "lemma": "kirja",
+      "form": "nominativ",
+      "category": "haus",
+      "level": 1,
+      "distractors": [
+        "kirje",
+        "kirjan",
+        "kirjat"
+      ]
+    },
+    {
+      "id": "leipa-nom",
+      "source": "das Brot",
+      "target": "leipä",
+      "lemma": "leipä",
+      "form": "nominativ",
+      "category": "essen",
+      "level": 1,
+      "distractors": [
+        "voi",
+        "leivän",
+        "leivät"
+      ]
+    },
+    {
+      "id": "maito-nom",
+      "source": "die Milch",
+      "target": "maito",
+      "lemma": "maito",
+      "form": "nominativ",
+      "category": "essen",
+      "level": 1,
+      "distractors": [
+        "vesi",
+        "kahvi",
+        "maidon"
+      ]
+    },
+    {
+      "id": "kahvi-nom",
+      "source": "der Kaffee",
+      "target": "kahvi",
+      "lemma": "kahvi",
+      "form": "nominativ",
+      "category": "essen",
+      "level": 1,
+      "distractors": [
+        "tee",
+        "maito",
+        "kahvin"
+      ]
+    },
+    {
+      "id": "omena-nom",
+      "source": "der Apfel",
+      "target": "omena",
+      "lemma": "omena",
+      "form": "nominativ",
+      "category": "essen",
+      "level": 1,
+      "distractors": [
+        "päärynä",
+        "omenan",
+        "omenat"
+      ]
+    },
+    {
+      "id": "lentokentta-nom",
+      "source": "der Flughafen",
+      "target": "lentokenttä",
+      "lemma": "lentokenttä",
+      "form": "nominativ",
+      "category": "reisen",
+      "level": 1,
+      "distractors": [
+        "lentokone",
+        "rautatieasema",
+        "satama"
+      ]
+    },
+    {
+      "id": "juna-nom",
+      "source": "der Zug",
+      "target": "juna",
+      "lemma": "juna",
+      "form": "nominativ",
+      "category": "reisen",
+      "level": 1,
+      "distractors": [
+        "bussi",
+        "junan",
+        "junat"
+      ]
+    },
+    {
+      "id": "laiva-nom",
+      "source": "das Schiff",
+      "target": "laiva",
+      "lemma": "laiva",
+      "form": "nominativ",
+      "category": "reisen",
+      "level": 1,
+      "distractors": [
+        "vene",
+        "laivan",
+        "laivat"
+      ]
+    },
+    {
+      "id": "kaupunki-nom",
+      "source": "die Stadt",
+      "target": "kaupunki",
+      "lemma": "kaupunki",
+      "form": "nominativ",
+      "category": "reisen",
+      "level": 1,
+      "distractors": [
+        "kylä",
+        "kaupungin",
+        "kaupungit"
+      ]
+    },
+    {
+      "id": "katu-nom",
+      "source": "die Straße",
+      "target": "katu",
+      "lemma": "katu",
+      "form": "nominativ",
+      "category": "reisen",
+      "level": 1,
+      "distractors": [
+        "tie",
+        "kadun",
+        "kadut"
+      ]
+    },
+    {
+      "id": "punainen",
+      "source": "rot",
+      "target": "punainen",
+      "lemma": "punainen",
+      "form": "nominativ",
+      "category": "farben",
+      "level": 1,
+      "distractors": [
+        "sininen",
+        "keltainen",
+        "punaisen"
+      ]
+    },
+    {
+      "id": "sininen",
+      "source": "blau",
+      "target": "sininen",
+      "lemma": "sininen",
+      "form": "nominativ",
+      "category": "farben",
+      "level": 1,
+      "distractors": [
+        "vihreä",
+        "punainen",
+        "sinisen"
+      ]
+    },
+    {
+      "id": "vihrea",
+      "source": "grün",
+      "target": "vihreä",
+      "lemma": "vihreä",
+      "form": "nominativ",
+      "category": "farben",
+      "level": 1,
+      "distractors": [
+        "sininen",
+        "keltainen",
+        "vihreän"
+      ]
+    },
+    {
+      "id": "valkoinen",
+      "source": "weiß",
+      "target": "valkoinen",
+      "lemma": "valkoinen",
+      "form": "nominativ",
+      "category": "farben",
+      "level": 1,
+      "distractors": [
+        "musta",
+        "harmaa",
+        "valkoisen"
+      ]
+    },
+    {
+      "id": "musta",
+      "source": "schwarz",
+      "target": "musta",
+      "lemma": "musta",
+      "form": "nominativ",
+      "category": "farben",
+      "level": 1,
+      "distractors": [
+        "valkoinen",
+        "ruskea",
+        "mustan"
+      ]
+    },
+    {
+      "id": "talo-ine",
+      "source": "im Haus",
+      "target": "talossa",
+      "lemma": "talo",
+      "form": "inessiv",
+      "category": "haus",
+      "level": 2,
+      "distractors": [
+        "talosta",
+        "taloon",
+        "talolla"
+      ]
+    },
+    {
+      "id": "talo-ill",
+      "source": "ins Haus",
+      "target": "taloon",
+      "lemma": "talo",
+      "form": "illativ",
+      "category": "haus",
+      "level": 2,
+      "distractors": [
+        "talossa",
+        "talosta",
+        "talolle"
+      ]
+    },
+    {
+      "id": "talo-ela",
+      "source": "aus dem Haus",
+      "target": "talosta",
+      "lemma": "talo",
+      "form": "elativ",
+      "category": "haus",
+      "level": 2,
+      "distractors": [
+        "talossa",
+        "taloon",
+        "talolta"
+      ]
+    },
+    {
+      "id": "talo-pl",
+      "source": "die Häuser",
+      "target": "talot",
+      "lemma": "talo",
+      "form": "plural",
+      "category": "haus",
+      "level": 2,
+      "distractors": [
+        "talon",
+        "taloja",
+        "talossa"
+      ]
+    },
+    {
+      "id": "koira-gen",
+      "source": "des Hundes",
+      "target": "koiran",
+      "lemma": "koira",
+      "form": "genitiv",
+      "category": "tiere",
+      "level": 2,
+      "distractors": [
+        "koira",
+        "koirat",
+        "koiraa"
+      ]
+    },
+    {
+      "id": "koira-pl",
+      "source": "die Hunde",
+      "target": "koirat",
+      "lemma": "koira",
+      "form": "plural",
+      "category": "tiere",
+      "level": 2,
+      "distractors": [
+        "koiran",
+        "koiria",
+        "koira"
+      ]
+    },
+    {
+      "id": "kissa-pl",
+      "source": "die Katzen",
+      "target": "kissat",
+      "lemma": "kissa",
+      "form": "plural",
+      "category": "tiere",
+      "level": 2,
+      "distractors": [
+        "kissan",
+        "kissoja",
+        "kissa"
+      ]
+    },
+    {
+      "id": "metsa-ine",
+      "source": "im Wald",
+      "target": "metsässä",
+      "lemma": "metsä",
+      "form": "inessiv",
+      "category": "natur",
+      "level": 2,
+      "distractors": [
+        "metsään",
+        "metsästä",
+        "metsällä"
+      ]
+    },
+    {
+      "id": "metsa-ill",
+      "source": "in den Wald",
+      "target": "metsään",
+      "lemma": "metsä",
+      "form": "illativ",
+      "category": "natur",
+      "level": 2,
+      "distractors": [
+        "metsässä",
+        "metsästä",
+        "metsälle"
+      ]
+    },
+    {
+      "id": "jarvi-ine",
+      "source": "im See",
+      "target": "järvessä",
+      "lemma": "järvi",
+      "form": "inessiv",
+      "category": "natur",
+      "level": 2,
+      "distractors": [
+        "järvellä",
+        "järveen",
+        "järvestä"
+      ]
+    },
+    {
+      "id": "lumi-ine",
+      "source": "im Schnee",
+      "target": "lumessa",
+      "lemma": "lumi",
+      "form": "inessiv",
+      "category": "natur",
+      "level": 2,
+      "distractors": [
+        "lumella",
+        "lumeen",
+        "lunta"
+      ]
+    },
+    {
+      "id": "vuori-ade",
+      "source": "auf dem Berg",
+      "target": "vuorella",
+      "lemma": "vuori",
+      "form": "adessiv",
+      "category": "natur",
+      "level": 2,
+      "distractors": [
+        "vuoressa",
+        "vuorelle",
+        "vuorelta"
+      ]
+    },
+    {
+      "id": "poyta-ade",
+      "source": "auf dem Tisch",
+      "target": "pöydällä",
+      "lemma": "pöytä",
+      "form": "adessiv",
+      "category": "haus",
+      "level": 2,
+      "distractors": [
+        "pöydältä",
+        "pöydälle",
+        "pöydässä"
+      ]
+    },
+    {
+      "id": "poyta-abl",
+      "source": "vom Tisch",
+      "target": "pöydältä",
+      "lemma": "pöytä",
+      "form": "ablativ",
+      "category": "haus",
+      "level": 2,
+      "distractors": [
+        "pöydällä",
+        "pöydälle",
+        "pöydästä"
+      ]
+    },
+    {
+      "id": "kaupunki-ine",
+      "source": "in der Stadt",
+      "target": "kaupungissa",
+      "lemma": "kaupunki",
+      "form": "inessiv",
+      "category": "reisen",
+      "level": 2,
+      "distractors": [
+        "kaupunkiin",
+        "kaupungista",
+        "kaupungilla"
+      ]
+    },
+    {
+      "id": "lentokentta-ade",
+      "source": "am Flughafen",
+      "target": "lentokentällä",
+      "lemma": "lentokenttä",
+      "form": "adessiv",
+      "category": "reisen",
+      "level": 2,
+      "distractors": [
+        "lentokentälle",
+        "lentokentältä",
+        "lentokentässä"
+      ]
+    },
+    {
+      "id": "juna-ade",
+      "source": "mit dem Zug",
+      "target": "junalla",
+      "lemma": "juna",
+      "form": "adessiv",
+      "category": "reisen",
+      "level": 2,
+      "distractors": [
+        "junassa",
+        "junaan",
+        "junalle"
+      ]
+    },
+    {
+      "id": "vesi-par",
+      "source": "(etwas) Wasser",
+      "target": "vettä",
+      "lemma": "vesi",
+      "form": "partitiv",
+      "category": "natur",
+      "level": 2,
+      "distractors": [
+        "vesi",
+        "veden",
+        "vedet"
+      ]
+    },
+    {
+      "id": "leipa-par",
+      "source": "(etwas) Brot",
+      "target": "leipää",
+      "lemma": "leipä",
+      "form": "partitiv",
+      "category": "essen",
+      "level": 2,
+      "distractors": [
+        "leipä",
+        "leivän",
+        "leivät"
+      ]
+    },
+    {
+      "id": "maito-par",
+      "source": "(etwas) Milch",
+      "target": "maitoa",
+      "lemma": "maito",
+      "form": "partitiv",
+      "category": "essen",
+      "level": 2,
+      "distractors": [
+        "maito",
+        "maidon",
+        "maidot"
+      ]
+    }
+  ]
+}

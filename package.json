@@ -1,0 +1,33 @@
+{
+  "name": "mustikka-hyppy",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Vokabel-Sprungspiel im Doodle-Jump-Stil (Deutsch → Finnisch), Phaser 3 + TypeScript + Vite",
+  "scripts": {
+    "dev": "vite",
+    "handy": "vite --mode handy",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "check": "esbuild scripts/check-level.ts --bundle --platform=node --format=esm --log-level=warning --outfile=node_modules/.cache/check-level.mjs && node node_modules/.cache/check-level.mjs",
+    "day-assets": "node scripts/make-day-assets.mjs",
+    "test-import": "esbuild scripts/test-import.ts --bundle --platform=node --format=esm --log-level=warning --external:sql.js --outfile=node_modules/.cache/test-import.mjs && node node_modules/.cache/test-import.mjs",
+    "wordlist": "node scripts/wordlist/build.mjs"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "fzstd": "^0.1.1",
+    "phaser": "^3.90.0",
+    "sql.js": "^1.14.2"
+  },
+  "devDependencies": {
+    "@types/pngjs": "^6.0.5",
+    "@types/sql.js": "^1.4.11",
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "esbuild": "^0.28.2",
+    "pngjs": "^7.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.6"
+  }
+}

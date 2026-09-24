@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+android/
+
+# private Dateien – nicht veröffentlichen
+*.apkg
+*.zip
+*.tgz
+_to_delete/
+vocab/privat/

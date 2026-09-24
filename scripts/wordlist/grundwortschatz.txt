@@ -1,0 +1,711 @@
+# Eigene Grundwortschatz-Liste Deutsch → Finnisch (frei zusammengestellt, CC0)
+# Format: Stufe | Deutsch | Finnisch | weitere richtige Varianten (durch ; getrennt)
+# Stufen: 1 sehr leicht … 5 sehr schwer (Wendungen mit Kasusendungen)
+# Zeilen mit "## Name" beginnen eine neue Kategorie.
+
+## Begrüßung
+1|Hallo!|Hei!|Moi!;Moikka!;Heippa!
+1|Danke!|Kiitos!
+1|ja|kyllä
+1|nein|ei
+2|Guten Morgen!|Hyvää huomenta!
+2|Guten Tag!|Hyvää päivää!
+2|Guten Abend!|Hyvää iltaa!
+2|Gute Nacht!|Hyvää yötä!
+2|Tschüss!|Hei hei!|Heippa!;Moikka!;Moi!;Näkemiin!;Nähdään!
+2|Auf Wiedersehen!|Näkemiin!|Nähdään!;Hei hei!
+2|Bitte schön! (beim Geben)|Ole hyvä!
+2|Entschuldigung!|Anteeksi!
+2|Hilfe!|Apua!
+2|Viel Glück!|Onnea!
+3|Willkommen!|Tervetuloa!
+3|Wie geht's?|Mitä kuuluu?|Miten menee?
+3|Danke, gut.|Kiitos hyvää.
+3|Freut mich!|Hauska tavata!
+3|Bis dann!|Nähdään!|Hei hei!
+3|Guten Appetit!|Hyvää ruokahalua!
+3|Prost!|Kippis!
+3|Frohe Weihnachten!|Hyvää joulua!
+3|Gute Reise!|Hyvää matkaa!
+3|Nein danke.|Ei kiitos.
+3|Keine Ursache.|Eipä kestä.|Ei se mitään.
+4|Alles Gute zum Geburtstag!|Hyvää syntymäpäivää!
+4|Herzlichen Glückwunsch!|Onneksi olkoon!|Onnea!;Paljon onnea!
+4|Ich verstehe nicht.|En ymmärrä.
+4|Ich weiß nicht.|En tiedä.
+4|Sprichst du Englisch?|Puhutko englantia?
+4|Wie heißt du?|Mikä sinun nimesi on?
+4|Woher kommst du?|Mistä sinä olet?
+4|Wo ist die Toilette?|Missä on vessa?
+4|Das macht nichts.|Ei haittaa.|Ei se mitään.
+4|Ich liebe dich.|Rakastan sinua.
+5|Ich heiße …|Minun nimeni on …
+5|Ich komme aus Deutschland.|Olen Saksasta.
+5|Ich spreche ein bisschen Finnisch.|Puhun vähän suomea.
+5|Kannst du langsamer sprechen?|Voitko puhua hitaammin?
+5|Was kostet das?|Paljonko se maksaa?|Paljonko tämä maksaa?
+5|Könnte ich … bekommen?|Saisinko …?
+5|Wie spät ist es?|Paljonko kello on?|Mitä kello on?
+
+## Zahlen
+1|null|nolla
+1|eins|yksi
+1|zwei|kaksi
+1|drei|kolme
+1|vier|neljä
+1|fünf|viisi
+1|sechs|kuusi
+1|sieben|seitsemän
+1|acht|kahdeksan
+1|neun|yhdeksän
+1|zehn|kymmenen
+1|die Million|miljoona
+2|elf|yksitoista
+2|zwölf|kaksitoista
+2|hundert|sata
+2|tausend|tuhat
+2|die Zahl|numero|luku
+3|dreizehn|kolmetoista
+3|zwanzig|kaksikymmentä
+3|fünfzig|viisikymmentä
+3|der erste|ensimmäinen
+3|der zweite|toinen
+3|der dritte|kolmas
+3|halb|puoli
+
+## Zeit
+1|jetzt|nyt
+1|die Minute|minuutti
+1|die Sekunde|sekunti
+1|der Sommer|kesä
+1|der Winter|talvi
+2|der Tag|päivä
+2|die Nacht|yö
+2|der Morgen|aamu
+2|der Abend|ilta
+2|die Woche|viikko
+2|das Jahr|vuosi
+2|die Stunde|tunti
+2|die Uhr|kello
+2|heute|tänään
+2|gestern|eilen
+2|immer|aina
+2|der Frühling|kevät
+2|der Herbst|syksy
+2|der Montag|maanantai
+2|der Dienstag|tiistai
+2|der Donnerstag|torstai
+2|der Freitag|perjantai
+2|der Samstag|lauantai
+2|der Sonntag|sunnuntai
+3|der Mittwoch|keskiviikko
+3|morgen|huomenna
+3|oft|usein
+3|manchmal|joskus
+3|bald|pian
+3|spät|myöhään
+3|früh|aikaisin
+3|der Vormittag|aamupäivä
+3|der Nachmittag|iltapäivä
+3|das Wochenende|viikonloppu
+3|der Monat|kuukausi
+3|der Januar|tammikuu
+3|der Mai|toukokuu
+3|der Juni|kesäkuu
+3|der Juli|heinäkuu
+3|der Dezember|joulukuu
+4|der Februar|helmikuu
+4|der März|maaliskuu
+4|der April|huhtikuu
+4|der August|elokuu
+4|der September|syyskuu
+4|der Oktober|lokakuu
+4|der November|marraskuu
+4|nie|ei koskaan
+4|die Mitternacht|keskiyö
+4|übermorgen|ylihuomenna
+4|vorgestern|toissapäivänä
+
+## Familie & Menschen
+1|die Mutter|äiti
+1|der Vater|isä
+1|der Mann (allgemein)|mies
+1|das Baby|vauva
+2|die Frau (allgemein)|nainen
+2|der Bruder|veli
+2|die Schwester|sisko|sisar
+2|das Kind|lapsi
+2|der Sohn|poika
+2|das Mädchen|tyttö
+2|die Familie|perhe
+2|der Freund (Kumpel)|ystävä|kaveri
+2|der Name|nimi
+3|die Tochter|tytär
+3|die Großmutter|isoäiti|mummo
+3|der Großvater|isoisä|vaari;pappa
+3|die Eltern|vanhemmat
+3|der Nachbar|naapuri
+3|die Ehefrau|vaimo
+3|die Tante|täti
+3|der Mensch|ihminen
+3|die Leute|ihmiset
+3|das Alter|ikä
+4|der Ehemann|aviomies
+4|der Onkel|setä|eno
+4|der Cousin|serkku
+4|der (feste) Freund|poikaystävä
+4|die (feste) Freundin|tyttöystävä
+4|der Nachname|sukunimi
+
+## Körper & Gesundheit
+2|der Kopf|pää
+2|das Auge|silmä
+2|das Ohr|korva
+2|die Nase|nenä
+2|der Mund|suu
+2|die Hand|käsi
+2|der Fuß, das Bein|jalka
+2|der Arzt|lääkäri
+3|der Zahn|hammas
+3|die Haare|hiukset
+3|das Herz|sydän
+3|der Bauch|vatsa
+3|der Rücken|selkä
+3|der Finger|sormi
+3|der Hals|kaula|kurkku
+3|krank|sairas|kipeä
+3|gesund|terve
+3|der Schmerz|kipu
+3|das Medikament|lääke
+3|die Apotheke|apteekki
+3|das Krankenhaus|sairaala
+4|die Schulter|olkapää
+4|das Knie|polvi
+4|das Gesicht|kasvot
+4|das Fieber|kuume
+4|die Erkältung|flunssa
+4|die Kopfschmerzen|päänsärky
+
+## Essen & Trinken
+1|das Brot|leipä
+1|die Milch|maito
+1|das Wasser|vesi
+1|der Kaffee|kahvi
+1|der Tee|tee
+1|die Banane|banaani
+1|die Orange|appelsiini
+1|die Tomate|tomaatti
+1|der Salat|salaatti
+1|der Fisch|kala
+1|der Reis|riisi
+1|die Nudeln|pasta
+1|der Zucker|sokeri
+1|der Pfeffer|pippuri
+1|der Kuchen|kakku
+1|die Schokolade|suklaa
+1|der Wein|viini
+1|der Joghurt|jogurtti
+1|das Café|kahvila
+1|das Glas|lasi
+2|der Käse|juusto
+2|die Butter|voi
+2|das Ei|muna
+2|der Apfel|omena
+2|die Kartoffel|peruna
+2|die Möhre|porkkana
+2|die Gurke|kurkku
+2|die Zwiebel|sipuli
+2|das Fleisch|liha
+2|das Huhn (Fleisch)|kana
+2|die Wurst|makkara
+2|die Suppe|keitto
+2|das Salz|suola
+2|der Saft|mehu
+2|das Bier|olut
+2|die Beere|marja
+2|die Heidelbeere|mustikka
+2|der Pilz|sieni
+2|der Lachs|lohi
+2|der Kohl|kaali
+2|das Essen|ruoka
+2|die Tasse|kuppi
+2|die Flasche|pullo
+3|das Eis (zum Essen)|jäätelö
+3|das Hefegebäck|pulla
+3|die Erdbeere|mansikka
+3|der Honig|hunaja
+3|die Erbse|herne
+3|das Frühstück|aamiainen|aamupala
+3|das Mittagessen|lounas
+3|das Restaurant|ravintola
+3|der Teller|lautanen
+3|die Gabel|haarukka
+3|das Messer|veitsi
+3|der Löffel|lusikka
+3|der Hunger|nälkä
+3|der Durst|jano
+3|süß|makea
+4|die Preiselbeere|puolukka
+4|das Abendessen|illallinen|päivällinen
+4|das Roggenbrot|ruisleipä
+4|lecker|herkullinen|maukas
+4|sauer|hapan
+4|salzig|suolainen
+4|kochen (Kaffee, Suppe)|keittää
+4|braten|paistaa
+4|schneiden|leikata
+4|die karelische Pirogge|karjalanpiirakka
+5|Essen machen|laittaa ruokaa|tehdä ruokaa
+
+## Wohnen
+1|das Haus|talo
+1|die Sauna|sauna
+1|das Sofa|sohva
+1|die Lampe|lamppu
+2|das Zuhause|koti
+2|das Zimmer|huone
+2|die Toilette|vessa
+2|die Tür|ovi
+2|der Tisch|pöytä
+2|der Stuhl|tuoli
+2|das Bett|sänky
+3|die Wohnung|asunto
+3|die Küche|keittiö
+3|das Fenster|ikkuna
+3|der Schrank|kaappi
+3|der Schlüssel|avain
+3|das Dach|katto
+3|der Fußboden|lattia
+3|die Wand|seinä
+3|der Hof|piha
+3|der Garten|puutarha|piha
+3|der Aufzug|hissi
+3|das Ferienhäuschen|mökki
+4|das Schlafzimmer|makuuhuone
+4|das Wohnzimmer|olohuone
+4|das Badezimmer|kylpyhuone
+4|der Kühlschrank|jääkaappi
+4|der Herd|liesi|hella
+4|der Balkon|parveke
+4|die Treppe|portaat
+4|das Stockwerk|kerros
+4|die Miete|vuokra
+
+## Stadt & Länder
+1|die Bank (Geld)|pankki
+1|die Post|posti
+1|das Museum|museo
+1|das Hotel|hotelli
+1|der Kiosk|kioski
+1|das Theater|teatteri
+1|Finnland|Suomi
+2|die Stadt|kaupunki
+2|das Dorf|kylä
+2|die Straße|katu|tie
+2|der Weg|tie
+2|der Laden|kauppa
+2|die Schule|koulu
+2|der Park|puisto
+2|die Polizei|poliisi
+2|das Land|maa
+2|Deutschland|Saksa
+2|England|Englanti
+2|Spanien|Espanja
+3|der Marktplatz|tori
+3|die Bibliothek|kirjasto
+3|die Kirche|kirkko
+3|der Bahnhof|rautatieasema|asema
+3|der Flughafen|lentokenttä
+3|der Hafen|satama
+3|die Brücke|silta
+3|das Zentrum|keskusta
+3|das Büro|toimisto
+3|Schweden|Ruotsi
+3|Norwegen|Norja
+3|Frankreich|Ranska
+4|das Kaufhaus|tavaratalo
+4|das Lebensmittelgeschäft|ruokakauppa
+4|das Kino|elokuvateatteri
+4|die Fabrik|tehdas
+4|die Schwimmhalle|uimahalli
+4|das Fitnessstudio|kuntosali
+4|Estland|Viro
+4|Russland|Venäjä
+4|Finnisch (Sprache)|suomen kieli|suomi
+4|der Friseursalon|kampaamo
+
+## Unterwegs
+1|das Auto|auto
+1|der Bus|bussi
+1|das Taxi|taksi
+1|die U-Bahn|metro
+1|der Pass|passi
+2|der Zug|juna
+2|das Schiff|laiva
+2|das Boot|vene
+2|die Reise|matka
+2|die Landkarte|kartta
+3|das Fahrrad|polkupyörä|pyörä
+3|das Flugzeug|lentokone
+3|die Fahrkarte|lippu
+3|die Haltestelle|pysäkki
+3|hier|täällä
+3|dort|siellä
+4|die Straßenbahn|raitiovaunu|ratikka
+4|der Koffer|matkalaukku
+4|rechts|oikealla
+4|links|vasemmalla
+4|geradeaus|suoraan
+4|in der Nähe|lähellä
+4|weit weg|kaukana
+4|nach oben|ylös
+4|nach unten|alas
+
+## Kleidung
+1|der Hut|hattu
+2|das Hemd|paita
+2|die Hose|housut
+2|das Kleid|mekko
+2|die Jacke|takki
+2|die Schuhe|kengät
+2|das T-Shirt|T-paita
+2|die Jeans|farkut
+3|der Rock|hame
+3|die Socken|sukat
+3|die Mütze|pipo|lakki
+3|die Handschuhe|hanskat|käsineet
+3|der Schal|huivi
+3|die Tasche|laukku
+3|die Kleidung|vaatteet
+4|der Pullover|villapaita|neule
+4|der Regenschirm|sateenvarjo
+4|die Brille|silmälasit
+4|der Badeanzug|uimapuku
+4|die Stiefel|saappaat
+
+## Farben
+1|orange|oranssi
+1|lila|violetti|liila
+2|rot|punainen
+2|blau|sininen
+2|grün|vihreä
+2|gelb|keltainen
+2|schwarz|musta
+2|weiß|valkoinen
+2|grau|harmaa
+2|die Farbe|väri
+3|braun|ruskea
+4|rosa|vaaleanpunainen|pinkki
+
+## Natur & Wetter
+2|die Sonne|aurinko
+2|der Mond|kuu
+2|der Stern|tähti
+2|der Schnee|lumi
+2|das Eis (gefroren)|jää
+2|das Wetter|sää
+2|der Wald|metsä
+2|der See|järvi
+2|das Meer|meri
+2|der Fluss|joki
+2|der Berg|vuori
+2|der Baum|puu
+2|die Blume|kukka
+2|der Stein|kivi
+2|warm|lämmin
+3|der Himmel|taivas
+3|die Wolke|pilvi
+3|der Regen|sade
+3|der Wind|tuuli
+3|die Insel|saari
+3|das Gras|ruoho
+3|der Strand, das Ufer|ranta
+3|die Natur|luonto
+3|kühl|viileä
+3|dunkel|pimeä
+4|das Fjell|tunturi
+4|das Nordlicht|revontulet
+4|es regnet|sataa
+4|der Frost|pakkanen
+4|der Sturm|myrsky
+4|der Nebel|sumu
+4|das Gewitter|ukkonen
+4|der Regenbogen|sateenkaari
+4|hell|valoisa
+5|die Mitternachtssonne|keskiyön aurinko
+5|die Sonne scheint|aurinko paistaa
+
+## Tiere
+1|der Hund|koira
+1|die Katze|kissa
+2|der Vogel|lintu
+2|das Schwein|sika
+2|die Maus|hiiri
+2|der Bär|karhu
+2|das Rentier|poro
+2|die Ente|ankka|sorsa
+3|das Pferd|hevonen
+3|die Kuh|lehmä
+3|das Schaf|lammas
+3|der Wolf|susi
+3|der Fuchs|kettu
+3|der Hase|jänis
+3|das Eichhörnchen|orava
+3|der Elch|hirvi
+3|die Mücke|hyttynen
+3|die Möwe|lokki
+3|die Eule|pöllö
+3|das Tier|eläin
+3|der Igel|siili
+4|der Luchs|ilves
+4|die Schlange|käärme
+4|der Frosch|sammakko
+4|die Biene|mehiläinen
+4|der Schmetterling|perhonen
+4|der Schwan|joutsen
+4|die Robbe|hylje
+4|die Spinne|hämähäkki
+4|die Ameise|muurahainen
+
+## Arbeit & Geld
+1|das Papier|paperi
+2|die Arbeit|työ
+2|das Buch|kirja
+2|der Stift|kynä
+2|das Wort|sana
+2|die Sprache|kieli
+2|der Urlaub|loma
+2|der Koch|kokki
+2|der Ingenieur|insinööri
+2|das Geld|raha
+3|der Lehrer|opettaja
+3|der Schüler|oppilas
+3|der Student|opiskelija
+3|der Computer|tietokone
+3|das Telefon|puhelin|kännykkä
+3|das Handy|kännykkä|puhelin;matkapuhelin
+3|die Frage|kysymys
+3|die Antwort|vastaus
+3|der Preis|hinta
+3|billig|halpa
+3|teuer|kallis
+4|die Besprechung|kokous|palaveri
+4|der Lohn|palkka
+4|der Beruf|ammatti
+4|der Verkäufer|myyjä
+4|der Krankenpfleger|sairaanhoitaja
+4|der Schriftsteller|kirjailija
+4|der Fahrer|kuljettaja
+4|die Quittung|kuitti
+4|die Rechnung|lasku
+4|die Bankkarte|pankkikortti
+
+## Freizeit
+1|die Musik|musiikki
+1|die Gitarre|kitara
+1|der Fernseher|televisio|telkkari
+2|das Spiel|peli
+2|das Bild|kuva|valokuva
+2|der Tanz|tanssi
+3|das Lied|laulu
+3|der Film|elokuva
+3|der Fußball|jalkapallo
+3|das Fest|juhla
+3|das Geschenk|lahja
+3|das Foto|valokuva|kuva
+3|die Zeitung|lehti|sanomalehti
+4|das Eishockey|jääkiekko
+4|der Skilanglauf|hiihto
+4|das Schwimmen|uinti
+4|das Hobby|harrastus
+4|die Kunst|taide
+4|die Nachrichten|uutiset
+
+## Verben
+2|sein|olla
+2|gehen|mennä
+2|kommen|tulla
+2|essen|syödä
+2|trinken|juoda
+2|sprechen|puhua
+2|kaufen|ostaa
+2|lesen|lukea
+2|wohnen|asua
+2|tanzen|tanssia
+3|schlafen|nukkua
+3|sagen|sanoa
+3|fragen|kysyä
+3|machen|tehdä
+3|verkaufen|myydä
+3|bezahlen|maksaa
+3|geben|antaa
+3|nehmen|ottaa
+3|sehen|nähdä
+3|schauen|katsoa
+3|hören|kuulla
+3|schreiben|kirjoittaa
+3|lernen|oppia|opiskella
+3|studieren|opiskella
+3|wissen|tietää
+3|lieben|rakastaa
+3|wollen|haluta
+3|spielen (ein Spiel)|pelata
+3|singen|laulaa
+3|schwimmen|uida
+3|rennen|juosta
+3|spazieren gehen|kävellä
+3|fahren|ajaa
+3|fliegen|lentää
+3|sitzen|istua
+3|helfen|auttaa
+3|suchen|etsiä
+3|finden|löytää
+3|reisen|matkustaa
+3|lachen|nauraa
+4|antworten|vastata
+4|zuhören|kuunnella
+4|verstehen|ymmärtää
+4|denken|ajatella
+4|mögen|pitää
+4|können|voida|osata
+4|arbeiten|tehdä töitä|työskennellä
+4|spielen (Kinder)|leikkiä
+4|stehen|seistä
+4|warten|odottaa
+4|öffnen|avata
+4|schließen|sulkea
+4|anfangen|alkaa|aloittaa
+4|aufhören|lopettaa
+4|aufwachen|herätä
+4|aufstehen|nousta
+4|waschen|pestä
+4|putzen|siivota
+4|anrufen|soittaa
+4|sich erinnern|muistaa
+4|vergessen|unohtaa
+4|brauchen|tarvita
+4|probieren (kosten)|maistaa
+4|treffen|tavata
+4|weinen|itkeä
+4|lächeln|hymyillä
+4|hoffen|toivoa
+4|glauben|uskoa
+5|müssen|täytyä|pitää;joutua
+4|zurückkehren|palata
+5|Angst haben|pelätä
+
+## Adjektive
+1|gut|hyvä
+2|groß|iso|suuri
+2|klein|pieni
+2|schlecht|huono
+2|neu|uusi
+2|alt|vanha
+2|jung|nuori
+2|schön|kaunis
+2|lang|pitkä
+2|heiß|kuuma
+2|kalt|kylmä
+2|viel|paljon
+2|wenig|vähän
+2|alle|kaikki
+3|hässlich|ruma
+3|kurz|lyhyt
+3|schnell|nopea
+3|langsam|hidas
+3|einfach, leicht|helppo
+3|schwierig|vaikea
+3|fröhlich|iloinen
+3|müde|väsynyt
+3|lieb, brav|kiltti
+3|nett|mukava|kiltti
+3|lustig|hauska
+3|langweilig|tylsä
+3|fertig|valmis
+3|frei|vapaa
+3|voll|täysi
+3|leer|tyhjä
+3|sauber|puhdas
+3|reich|rikas
+3|arm|köyhä
+3|faul|laiska
+3|richtig|oikea
+3|falsch|väärä
+3|gleich|sama
+4|schwer (Gewicht)|painava
+4|leicht (Gewicht)|kevyt
+4|traurig|surullinen
+4|glücklich|onnellinen
+4|wütend|vihainen
+4|wichtig|tärkeä
+4|schmutzig|likainen
+4|fleißig|ahkera
+4|leise|hiljainen
+4|laut|äänekäs
+4|nass|märkä
+4|trocken|kuiva
+4|verschieden|eri|erilainen
+
+## Kleine Wörter
+1|ich|minä
+1|du|sinä
+1|wir|me
+1|und|ja
+2|er, sie|hän
+2|ihr|te
+2|sie (Mehrzahl)|he
+2|was|mikä|mitä
+2|wer|kuka
+2|wo|missä
+2|oder|tai
+2|aber|mutta
+3|woher|mistä
+3|wohin|mihin|minne
+3|wann|milloin|koska
+3|warum|miksi
+3|wie|miten|kuinka
+3|wie viel|paljonko
+3|weil|koska
+3|auch|myös
+3|nur|vain
+3|vielleicht|ehkä
+3|dieser, das hier|tämä
+4|jener, das da|tuo
+4|dass|että
+4|wenn, falls|jos
+4|jeder|jokainen
+4|nichts|ei mitään
+4|etwas|jotain|jotakin
+4|jemand|joku
+4|mit (jemandem)|kanssa
+4|ohne|ilman
+4|vor (zeitlich)|ennen
+5|nach (zeitlich)|jälkeen
+
+## Wendungen
+4|zu Hause|kotona
+4|nach Hause|kotiin
+4|im Sommer|kesällä
+4|im Winter|talvella
+4|jeden Tag|joka päivä
+4|Ich spreche Finnisch.|Puhun suomea.
+4|Ich bin müde.|Olen väsynyt.
+4|Es ist kalt.|On kylmä.
+4|Wo wohnst du?|Missä sinä asut?
+4|Was machst du?|Mitä sinä teet?
+5|Ich habe ein Auto.|Minulla on auto.
+5|Ich habe Hunger.|Minulla on nälkä.
+5|Ich habe Durst.|Minulla on jano.
+5|Mir ist kalt.|Minulla on kylmä.|Minua palelee.
+5|in Finnland|Suomessa
+5|aus Finnland|Suomesta
+5|nach Finnland|Suomeen
+5|im Haus|talossa
+5|auf dem Tisch|pöydällä
+5|mit dem Bus|bussilla
+5|am Montag|maanantaina
+5|heute Abend|tänä iltana|tänään illalla
+5|zwei Kaffee|kaksi kahvia
+5|Ich wohne in Helsinki.|Asun Helsingissä.
+5|Ich mag Kaffee.|Pidän kahvista.
+5|Wie alt bist du?|Kuinka vanha olet?
