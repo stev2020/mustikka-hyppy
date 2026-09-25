@@ -2,12 +2,13 @@ import { ASSET_FILES, type AssetKey } from './assets';
 import { SKY_GRADIENT } from './tuning';
 
 /**
- * Themen (Tageszeiten). "night" ist die ursprüngliche Abendstimmung,
- * "day" eine helle Variante mit umgefärbten Hintergründen aus assets/day/
- * (erzeugt mit `npm run day-assets`).
+ * Aussehen des Spiels. Seit dem Kritzel-Umbau gibt es nur noch ein Thema:
+ * alles wie mit Filzstift ins karierte Schulheft gezeichnet (Grafiken aus
+ * scripts/doodle/generate.py). Die Struktur bleibt, damit später weitere
+ * Themen dazukommen können.
  */
-export type ThemeId = 'night' | 'day';
-export const THEME_IDS: ThemeId[] = ['night', 'day'];
+export type ThemeId = 'doodle';
+export const THEME_IDS: ThemeId[] = ['doodle'];
 
 export interface SkyStop {
   h: number;
@@ -35,34 +36,17 @@ export interface Theme {
 }
 
 export const THEMES: Record<ThemeId, Theme> = {
-  night: {
-    id: 'night',
-    label: 'Abend',
+  doodle: {
+    id: 'doodle',
+    label: 'Kritzel',
     bgDir: '',
     sky: SKY_GRADIENT,
-    stars: 1,
-    aurora: 1,
+    stars: 0.35,
+    aurora: 0.8,
     moon: true,
     sun: false,
-    windowGlow: 1,
-    pageBackground: '#0b0a22',
-  },
-  day: {
-    id: 'day',
-    label: 'Tag',
-    bgDir: 'day/',
-    sky: [
-      { h: 0, top: 0x5aa6e8, mid: 0x9ed0f5, bottom: 0xe6f4ff },
-      { h: 2500, top: 0x4e9be3, mid: 0x8ec6f2, bottom: 0xd2ecfd },
-      { h: 5500, top: 0x3f8bdb, mid: 0x7db7ee, bottom: 0xbfe1fb },
-      { h: 8500, top: 0x2f78cf, mid: 0x6aa8e8, bottom: 0xaed7f7 },
-    ],
-    stars: 0,
-    aurora: 0,
-    moon: false,
-    sun: true,
-    windowGlow: 0.3,
-    pageBackground: '#4f8fd0',
+    windowGlow: 0,
+    pageBackground: '#faf7ef',
   },
 };
 

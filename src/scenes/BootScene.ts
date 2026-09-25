@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { ASSET_FILES, PLANK_WORD } from '../config/assets';
+import { ASSET_FILES, FONT_FILE, PLANK_WORD } from '../config/assets';
 import { DEFAULT_ASSET_BASE } from '../config/assets';
 import { DESIGN_H, DESIGN_W } from '../config/tuning';
 import { getCtx } from '../game/context';
@@ -21,7 +21,7 @@ export class BootScene extends Phaser.Scene {
     this.load.setPath(base);
 
     const label = makeText(this, DESIGN_W / 2, DESIGN_H / 2, 'Lade …', { size: 34 });
-    const bar = this.add.rectangle(DESIGN_W / 2 - 200, DESIGN_H / 2 + 60, 0, 12, 0x6fd58a).setOrigin(0, 0.5);
+    const bar = this.add.rectangle(DESIGN_W / 2 - 200, DESIGN_H / 2 + 60, 0, 12, 0x2b2230).setOrigin(0, 0.5);
     this.load.on('progress', (p: number) => {
       bar.width = 400 * p;
       label.setText(`Lade … ${Math.round(p * 100)} %`);
@@ -35,6 +35,8 @@ export class BootScene extends Phaser.Scene {
       if (!(THEMED_ASSETS as string[]).includes(key)) this.load.image(key, path);
     }
     queueTheme(this, ctx.theme);
+    // Handschrift für alle Texte (muss vor dem ersten Text geladen sein)
+    this.load.font(FONT_FILE.family, FONT_FILE.path, 'woff2');
   }
 
   create(): void {

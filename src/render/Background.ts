@@ -136,7 +136,8 @@ interface Cloud {
 }
 
 export class Background {
-  private sky: Phaser.GameObjects.Graphics;
+  /** kariertes Papier, wandert mit der Welt (wie ein Heft, in das gezeichnet wird) */
+  private sky: Phaser.GameObjects.TileSprite;
   private stars: Star[] = [];
   private auroras: { rope: Phaser.GameObjects.Rope; base: number; amp: number; k: number; w: number; phase: number; color: number; strength: number }[] = [];
   private moon?: Phaser.GameObjects.Image;
@@ -153,13 +154,14 @@ export class Background {
     private scene: Phaser.Scene,
     private theme: Theme,
   ) {
-    this.sky = scene.add.graphics().setScrollFactor(0).setDepth(DEPTH.sky);
+    this.sky = scene.add.tileSprite(0, 0, DESIGN_W, DESIGN_H, 'paper').setOrigin(0, 0).setScrollFactor(0).setDepth(DEPTH.sky);
 
     // Sterne
     const starCount = Math.round(SKY.starCount * theme.stars);
     for (let i = 0; i < starCount; i++) {
-      const img = scene.add.image(0, 0, 'fx_dot').setScrollFactor(0).setDepth(DEPTH.stars).setBlendMode(Phaser.BlendModes.ADD);
-      const scale = 0.12 + Math.pow(Math.random(), 3) * 0.28;
+      // gekritzelte Sternchen (64 px), leicht schräg
+      const img = scene.add.image(0, 0, 'star').setScrollFactor(0).setDepth(DEPTH.stars).setAngle(-15 + Math.random() * 30);
+      const scale = 0.26 + Math.pow(Math.random(), 2) * 0.26;
       this.stars.push({
         img,
         x: Math.random() * DESIGN_W,
@@ -174,17 +176,18 @@ export class Background {
 
     // Polarlicht: drei wabernde Bänder
     const auroraDefs = [
-      { base: 250, amp: 38, k: 0.0065, w: 0.35, color: 0x3cffa0, strength: 1.0 },
-      { base: 190, amp: 30, k: 0.009, w: -0.27, color: 0x2fe0e6, strength: 0.75 },
-      { base: 150, amp: 26, k: 0.0048, w: 0.2, color: 0xa070ff, strength: 0.5 },
+      { base: 250, amp: 38, k: 0.0065, w: 0.35, color: 0x3cc98a, strength: 1.0 },
+      { base: 190, amp: 30, k: 0.009, w: -0.27, color: 0x2fb4c6, strength: 0.75 },
+      { base: 150, amp: 26, k: 0.0048, w: 0.2, color: 0x9a6ae0, strength: 0.6 },
     ];
     // auch am Tag angelegt (unsichtbar), damit der Serien-Effekt sie aufleuchten lassen kann
     for (const d of auroraDefs) {
       const n = 40;
       const pts: Phaser.Math.Vector2[] = [];
       for (let i = 0; i < n; i++) pts.push(new Phaser.Math.Vector2(-60 + (i * (DESIGN_W + 120)) / (n - 1), 0));
-      const rope = scene.add.rope(0, 0, 'fx_aurora', undefined, pts, true);
-      rope.setScrollFactor(0).setDepth(DEPTH.aurora).setBlendMode(Phaser.BlendModes.ADD);
+      // Polarlicht als eingefärbtes Buntstift-Gekritzel
+      const rope = scene.add.rope(0, 0, 'aurora_band', undefined, pts, true);
+      rope.setScrollFactor(0).setDepth(DEPTH.aurora);
       rope.setColors(d.color);
       this.auroras.push({ rope, ...d, phase: Math.random() * 10 });
     }
@@ -195,7 +198,7 @@ export class Background {
     }
     if (theme.sun) {
       // Sonne: nur Licht (per Code erzeugter Verlauf), keine Grafik
-      const halo = scene.add.image(0, 0, 'fx_dot').setScrollFactor(0).setDepth(DEPTH.moon).setBlendMode(Phaser.BlendModes.ADD);
+      const halo = scene.add.image(0, 0, 'fx_dot').setScrollFactor(0).setDepth(DEPTH.moon).setBlendMode(Phaser.BlendModes.NORMAL);
       halo.setDisplaySize(420, 420).setTint(0xfff1c4).setAlpha(0.55);
       const core = scene.add.image(0, 0, 'fx_sun').setScrollFactor(0).setDepth(DEPTH.moon + 0.1);
       core.setDisplaySize(150, 150);
@@ -243,14 +246,8 @@ export class Background {
     this.time += dt;
     const t = this.time;
 
-    // Himmel
-    const c = skyColorsAt(camH, this.theme.sky);
-    const g = this.sky;
-    g.clear();
-    g.fillGradientStyle(c.top, c.top, c.mid, c.mid, 1);
-    g.fillRect(0, 0, DESIGN_W, DESIGN_H / 2 + 1);
-    g.fillGradientStyle(c.mid, c.mid, c.bottom, c.bottom, 1);
-    g.fillRect(0, DESIGN_H / 2, DESIGN_W, DESIGN_H / 2);
+    // Papier: Karos wandern mit den Plattformen nach unten
+    this.sky.tilePositionY = -camH;
 
     // Sterne: dichter und heller mit der Höhe
     const hp = clamp01(camH / 8500);
@@ -266,14 +263,15 @@ export class Background {
       let y = (s.y0 + camH * SKY.starFactor) % DESIGN_H;
       if (y < 0) y += DESIGN_H;
       const yFade = 1 - smooth((y / DESIGN_H - lowCut) / 0.25);
-      const tw = 0.65 + 0.35 * Math.sin(t * s.speed + s.phase);
+      const tw = 0.85 + 0.15 * Math.sin(t * s.speed + s.phase);
       const a = vis * bright * tw * yFade;
       s.img.setVisible(a > 0.01).setPosition(s.x, y).setAlpha(a).setScale(s.scale * (0.8 + 0.4 * hp));
     }
 
     // Polarlicht
     this.flareLevel = Math.max(0, this.flareLevel - dt / 2.4);
-    const intensity = (0.16 + 0.74 * smooth(camH / 7500)) * this.theme.aurora;
+    // Polarlicht erst weiter oben (am Start würde das Gekritzel wie ein Schleier wirken)
+    const intensity = 0.9 * smooth((camH - 2500) / 5000) * this.theme.aurora;
     for (const a of this.auroras) {
       const pts = a.rope.points;
       for (let i = 0; i < pts.length; i++) {

@@ -1,6 +1,6 @@
 /**
  * Eigenständiges Testspiel. Einstellungen lassen sich per URL setzen, z. B.
- *   ?tempo=fast  ?direction=reverse  ?levels=1,2  ?categories=tiere,natur  ?theme=day  ?play (ohne Menü)  ?debug
+ *   ?tempo=fast  ?direction=reverse  ?levels=1,2  ?categories=tiere,natur  ?play (ohne Menü)  ?debug
  */
 import { createMustikkaHyppy } from './index';
 import type { Direction } from './config/settings';

@@ -26,7 +26,7 @@ export interface MustikkaHyppyOptions {
   settings?: Partial<GameSettings>;
   /** wird am Ende jeder Runde mit dem Ergebnis aufgerufen */
   onResult?: (result: RoundResult) => void;
-  /** "Beenden" gedrückt (nur wenn allowMenu = false) */
+  /** Zurück zur Host-App: Knopf im Startmenü, bei allowMenu = false auch "Beenden" in Pause/Game Over */
   onExit?: () => void;
   /** Debug-Anzeige + Autopilot (Taste B), nur für Entwicklung */
   debug?: boolean;
@@ -62,7 +62,7 @@ export function createMustikkaHyppy(opts: MustikkaHyppyOptions): MustikkaHyppyIn
   const prefs = new LocalPrefs(settings.storagePrefix);
   const tempo: Tempo = settings.tempo && TEMPOS.includes(settings.tempo) ? settings.tempo : prefs.getTempo() ?? 'normal';
   if (settings.tempo) prefs.setTempo(tempo);
-  const theme: ThemeId = settings.theme && THEME_IDS.includes(settings.theme) ? settings.theme : prefs.getTheme() ?? 'night';
+  const theme: ThemeId = settings.theme && THEME_IDS.includes(settings.theme) ? settings.theme : prefs.getTheme() ?? 'doodle';
   if (settings.theme) prefs.setTheme(theme);
 
   const ctx: GameContext = {
@@ -118,7 +118,7 @@ export function createMustikkaHyppy(opts: MustikkaHyppyOptions): MustikkaHyppyIn
     parent: parentEl,
     width: Math.round(DESIGN_W * k),
     height: Math.round(DESIGN_H * k),
-    backgroundColor: '#0b0a22',
+    backgroundColor: '#faf7ef',
     scale: {
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,

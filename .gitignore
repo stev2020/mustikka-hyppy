@@ -10,3 +10,5 @@ android/
 *.tgz
 _to_delete/
 vocab/privat/
+dist-embed
+__pycache__/

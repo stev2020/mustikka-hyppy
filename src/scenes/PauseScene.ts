@@ -30,7 +30,7 @@ export class PauseScene extends Phaser.Scene {
       this.scene.stop();
       this.scene.resume('Game');
     };
-    layer.add(makeButton(this, cx, top + 395, 420, 80, 'Weiter', resume, { size: 34, color: 0x2f7a47 }).container);
+    layer.add(makeButton(this, cx, top + 395, 420, 80, 'Weiter', resume, { size: 34, color: 0x9be07a }).container);
     layer.add(
       makeButton(this, cx, top + 495, 420, 72, 'Neu starten', () => {
         game.endRound('quit');

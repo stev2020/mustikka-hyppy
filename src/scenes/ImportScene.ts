@@ -43,17 +43,17 @@ export class ImportScene extends Phaser.Scene {
     const L = this.add.container(0, 0).setDepth(DEPTH.overlay + 1);
 
     L.add(makeText(this, cx, top + 56, 'Wortliste importieren', { size: 40, weight: 900 }));
-    const title = makeText(this, cx, top + 106, `„${this.deck.title}“ · ${this.deck.notes.length} Karten`, { size: 22, weight: 700, color: '#c9bfff', strokeThickness: 0 });
+    const title = makeText(this, cx, top + 106, `„${this.deck.title}“ · ${this.deck.notes.length} Karten`, { size: 22, weight: 700, color: '#6b5f86', strokeThickness: 0 });
     fitText(title, DESIGN_W - 120, 22, 14);
     L.add(title);
 
     // Feldzuordnung
     const rowY = top + 180;
-    L.add(makeText(this, 80, rowY - 38, 'Lernsprache (auf den Planken)', { size: 18, weight: 700, color: '#c9bfff', strokeThickness: 0 }).setOrigin(0, 0.5));
+    L.add(makeText(this, 80, rowY - 38, 'Lernsprache (auf den Planken)', { size: 18, weight: 700, color: '#6b5f86', strokeThickness: 0 }).setOrigin(0, 0.5));
     this.fieldBtns.target = makeButton(this, cx, rowY, DESIGN_W - 140, 54, '', () => this.cycleField('target'), { size: 22 });
     L.add(this.fieldBtns.target.container);
 
-    L.add(makeText(this, 80, rowY + 62, 'Übersetzung (Frage oben)', { size: 18, weight: 700, color: '#c9bfff', strokeThickness: 0 }).setOrigin(0, 0.5));
+    L.add(makeText(this, 80, rowY + 62, 'Übersetzung (Frage oben)', { size: 18, weight: 700, color: '#6b5f86', strokeThickness: 0 }).setOrigin(0, 0.5));
     this.fieldBtns.source = makeButton(this, cx - 95, rowY + 100, DESIGN_W - 330, 54, '', () => this.cycleField('source'), { size: 22 });
     this.fieldBtns.lang = makeButton(this, DESIGN_W - 70 - 85, rowY + 100, 170, 54, '', () => this.cycleLang(), { size: 22 });
     L.add([this.fieldBtns.source.container, this.fieldBtns.lang.container]);
@@ -61,21 +61,21 @@ export class ImportScene extends Phaser.Scene {
     // Vorschau
     const pvTop = rowY + 160;
     const g = this.add.graphics();
-    g.fillStyle(0x000000, 0.22);
+    g.fillStyle(0x2b2230, 0.06);
     g.fillRoundedRect(66, pvTop, DESIGN_W - 132, 430, 22);
     L.add(g);
-    L.add(makeText(this, cx, pvTop + 30, 'Vorschau', { size: 20, weight: 800, color: '#ffd27a', strokeThickness: 0 }));
+    L.add(makeText(this, cx, pvTop + 30, 'Vorschau', { size: 20, weight: 800, color: '#d17a00', strokeThickness: 0 }));
     for (let i = 0; i < 8; i++) {
       const t = makeText(this, cx, pvTop + 76 + i * 44, '', { size: 23, weight: 700, strokeThickness: 4 });
       this.preview.push(t);
       L.add(t);
     }
-    this.statsText = makeText(this, cx, pvTop + 460, '', { size: 19, weight: 600, color: '#e9e2ff', strokeThickness: 0, wrapWidth: DESIGN_W - 140 });
+    this.statsText = makeText(this, cx, pvTop + 460, '', { size: 19, weight: 600, color: '#4a4058', strokeThickness: 0, wrapWidth: DESIGN_W - 140 });
     L.add(this.statsText);
-    this.errorText = makeText(this, cx, bottom - 180, '', { size: 20, weight: 700, color: '#ff8f8f', strokeThickness: 0 });
+    this.errorText = makeText(this, cx, bottom - 180, '', { size: 20, weight: 700, color: '#c8323c', strokeThickness: 0 });
     L.add(this.errorText);
 
-    L.add(makeButton(this, cx, bottom - 118, 440, 80, 'Übernehmen', () => this.accept(), { size: 32, color: 0x2f7a47 }).container);
+    L.add(makeButton(this, cx, bottom - 118, 440, 80, 'Übernehmen', () => this.accept(), { size: 32, color: 0x9be07a }).container);
     L.add(makeButton(this, cx, bottom - 44, 300, 54, 'Abbrechen', () => this.close(), { size: 22 }).container);
 
     this.refresh();

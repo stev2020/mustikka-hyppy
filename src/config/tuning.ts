@@ -120,12 +120,12 @@ export const WORD_PLANK = {
   /** in Reihen mit 4 Optionen darf eine Planke schmaler werden, wenn es sonst nicht passt */
   minWidthTight: 150,
   paddingX: 26,
-  fontSizeMax: 32,
-  fontSizeMin: 20,
+  fontSizeMax: 38,
+  fontSizeMin: 24,
   minGap: 8,
-  textColor: '#FFF6E1',
-  strokeColor: '#32190E',
-  strokeThickness: 7,
+  textColor: '#2b2230',
+  strokeColor: '#fff8e6',
+  strokeThickness: 0,
 };
 
 // ---------------------------------------------------------------------------

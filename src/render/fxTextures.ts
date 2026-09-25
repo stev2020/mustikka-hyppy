@@ -8,15 +8,16 @@ export function createFxTextures(scene: Phaser.Scene): void {
   const tex = scene.textures;
 
   if (!tex.exists('fx_dot')) {
+    // Konfetti-Punkt wie mit Filzstift: helle Füllung (wird eingefärbt), dunkler Rand
     const c = tex.createCanvas('fx_dot', 32, 32)!;
     const ctx = c.getContext();
-    const g = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
-    g.addColorStop(0, 'rgba(255,255,255,1)');
-    g.addColorStop(0.25, 'rgba(255,255,255,0.85)');
-    g.addColorStop(0.6, 'rgba(255,255,255,0.18)');
-    g.addColorStop(1, 'rgba(255,255,255,0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, 32, 32);
+    ctx.beginPath();
+    ctx.arc(16, 16, 11, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = 'rgba(38,30,44,0.9)';
+    ctx.stroke();
     c.refresh();
   }
 

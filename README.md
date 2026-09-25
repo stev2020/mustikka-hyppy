@@ -20,7 +20,8 @@ npm run dev        # Entwicklungsserver, Adresse steht in der Konsole (meist htt
 npm run build      # Produktions-Build nach dist/
 npm run preview    # Build lokal ansehen
 npm run check      # Level-Generator ohne Browser prüfen (Erreichbarkeit, Optionen, Wiederholung)
-npm run day-assets # Tag-Hintergründe neu erzeugen (nach Austausch der Hintergrundgrafiken)
+npm run doodle-assets # Kritzel-Grafiken neu zeichnen (Python 3 mit numpy, opencv-python, Pillow)
+npm run build:embed   # Einbettungs-Build nach dist-embed/ (ES-Modul + Grafiken, z. B. für den Suomi-Satztrainer)
 ```
 
 ### Auf dem Handy testen
@@ -63,27 +64,38 @@ Nützliche URL-Parameter für das Testspiel:
 | Parameter | Wirkung |
 |---|---|
 | `?tempo=slow\|normal\|fast` | Tempo vorgeben |
-| `?theme=day\|night` | Tag oder Abend |
 | `?direction=reverse` | Finnisch → Deutsch |
 | `?levels=1` / `?levels=1,2` | nur diese Vokabel-Level |
 | `?categories=tiere,natur` | nur diese Kategorien |
 | `?play` | Startbildschirm überspringen |
 | `?debug` | Höhe und Kamera einblenden, Taste **B** schaltet einen Autopiloten ein (nur zum Testen) |
 
-## Tageszeit: Abend und Tag
+## Aussehen: Kritzel-Look
 
-Im Startbildschirm kannst du zwischen **Abend** (Original) und **Tag** umschalten,
-auch mit der Taste T. Die Wahl wird gespeichert. In der Lern-App setzt du sie mit
-`settings.theme: 'day' | 'night'`.
+Alles sieht aus, als hätte jemand das Spiel im Unterricht ins karierte Schulheft
+gekritzelt: dicke Filzstift-Konturen, schnell ausgemalte Flächen, Handschrift.
+Setting und Figur bleiben: die Heidelbeere springt über Holzplanken mit
+Schneehaube, vorbei an See und Hütten, Wald, Fjell und Himmel mit Mond,
+Sternchen und Polarlicht.
 
-Die Tag-Variante verwendet dieselben Motive. `scripts/make-day-assets.mjs` färbt
-die Hintergründe um und legt sie in `assets/day/bg/` ab: Violett wird zu hellem
-Himmelblau, Schatten werden aufgehellt, und ferne Ebenen bekommen etwas Dunst.
-Dazu kommen ein heller Himmelsverlauf und eine per Code gezeichnete Sonne.
-Sterne und Polarlicht gibt es nur am Abend. Die Farben stehen in
-`src/config/themes.ts`, die Stärke der Umfärbung je Ebene in der `JOBS`-Liste
-des Skripts. Wenn du Hintergrundgrafiken austauschst, danach `npm run day-assets`
-ausführen.
+- **Grafiken:** `scripts/doodle/generate.py` zeichnet alle Bilder per Code
+  (Renderer in `scripts/doodle/doodle.py`) in denselben Maßen und Ankern wie
+  zuvor, damit Spiellogik und Level-Garantien gleich bleiben. Neu erzeugen mit
+  `npm run doodle-assets`.
+- **Papier:** `assets/bg/paper_tile.png` ist kachelbar und wandert mit den
+  Plattformen nach unten.
+- **Schrift:** Patrick Hand (SIL OFL 1.1, `assets/fonts/`), wird beim Start geladen.
+- **Frühere Grafiken:** die gemalten Abend-/Tag-Grafiken liegen unverändert in
+  `art/original/` (nicht mehr ausgeliefert). Die Tageszeit-Wahl entfällt; die
+  Themen-Struktur in `src/config/themes.ts` bleibt für spätere Varianten.
+
+## Einbettung (Lern-App)
+
+`npm run build:embed` erzeugt `dist-embed/mustikka-hyppy.js` (ES-Modul mit
+`createMustikkaHyppy`) plus Grafiken und Schrift. Der Anki-Import ist nicht
+enthalten; eingebettet `settings.allowImport: false` setzen. Wichtige Optionen:
+`settings.assetBaseUrl` (Pfad zu den Grafiken), `progressStore` (Lernstand im
+Konto der App) und `onExit` (zeigt im Startmenü „← Zurück“).
 
 ## Highscore
 
@@ -239,7 +251,7 @@ kann einen eigenen Speicher übergeben: `progressStore: { load(), save(map) }`.
 
 ```
 assets/                 fertige Grafiken (werden unverändert ausgeliefert)
-assets/day/             umgefärbte Tag-Hintergründe (erzeugt mit npm run day-assets)
+art/original/           frühere gemalte Grafiken (Abend/Tag), nicht ausgeliefert
 vocab/de-fi-grundwortschatz.json  Standard-Wortliste (erzeugt aus scripts/wordlist/grundwortschatz.txt)
 vocab/privat/           eigene Listen, nur lokal (nicht im Repository)
 vocab/de-fi-basis.json  kleines Beispiel mit handverlesenen Ablenkern und Grammatikformen
@@ -247,7 +259,7 @@ src/
   config/assets.ts      ALLE Asset-Pfade + Bildgeometrie (Anker, Laufflächen, Slice-Ränder)
   config/tuning.ts      Physik, Tempo, Level, Schwierigkeit, Welten, Himmelsfarben
   config/settings.ts    Einstellungen + lokale Speicherung (Tempo, Tageszeit, Neigung)
-  config/themes.ts      Tageszeiten: Himmelsfarben, Sterne/Polarlicht/Sonne, Tag-Hintergründe
+  config/themes.ts      Aussehen (Kritzel-Thema): Sterne, Polarlicht, Mond
   vocab/                Datenformat, Auswahl der Wörter, Ablenker, Wiederholungen, Lernstand
   level/                Level-Generator mit Erreichbarkeits-Garantien, Reihen-Layout
   import/               Anki-Import (.apkg/.txt), Aufräumen, gespeicherte Wortlisten
@@ -257,7 +269,7 @@ src/
   game/createGame.ts    Modul-Einstieg (siehe unten)
   main.ts               eigenständiges Testspiel
 scripts/check-level.ts  Prüfskript für `npm run check`
-scripts/make-day-assets.mjs  erzeugt die Tag-Hintergründe
+scripts/doodle/          Kritzel-Grafiken (generate.py, doodle.py)
 ```
 
 Grafiken tauscht man aus, indem man die Dateien ersetzt oder die Pfade in
@@ -278,7 +290,7 @@ const game = createMustikkaHyppy({
     levels: [1, 2],
     categories: ['tiere', 'haus'],
     tempo: 'normal',                   // 'slow' | 'normal' | 'fast'
-    theme: 'day',                      // 'day' | 'night'
+    theme: 'doodle',                   // einziges Thema
     sound: true,                       // Soundeffekte
     pronunciation: true,               // finnische Wörter vorlesen
     showMenu: false,                   // direkt starten

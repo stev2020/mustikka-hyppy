@@ -48,13 +48,13 @@ export function installOrientationGuard(
     style.textContent = `
       #mh-rotate { position: fixed; inset: 0; z-index: 1000; display: none;
         flex-direction: column; align-items: center; justify-content: center; gap: 28px;
-        background: radial-gradient(circle at 50% 40%, #2a2466, #0b0a22 75%);
-        color: #fff4dc; font: 800 26px/1.3 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-        text-align: center; text-shadow: 0 2px 0 #3a1d12; touch-action: none; }
-      #mh-rotate .mh-rot-phone { width: 56px; height: 96px; border: 6px solid #fff4dc; border-radius: 14px;
+        background: #faf7ef linear-gradient(#b2c6d8 1px, transparent 1px) 0 0 / 26px 26px, linear-gradient(90deg, #b2c6d8 1px, transparent 1px) 0 0 / 26px 26px;
+        color: #2b2230; font: 28px/1.3 'Patrick Hand', 'Comic Sans MS', system-ui, sans-serif;
+        text-align: center; touch-action: none; }
+      #mh-rotate .mh-rot-phone { width: 56px; height: 96px; border: 6px solid #2b2230; border-radius: 14px;
         box-sizing: border-box; position: relative; animation: mh-rot 2.4s ease-in-out infinite; }
       #mh-rotate .mh-rot-phone::after { content: ''; position: absolute; left: 50%; bottom: 6px; width: 12px; height: 4px;
-        margin-left: -6px; border-radius: 2px; background: #fff4dc; }
+        margin-left: -6px; border-radius: 2px; background: #2b2230; }
       @keyframes mh-rot { 0%, 25% { transform: rotate(-90deg); } 55%, 100% { transform: rotate(0deg); } }`;
     overlay.appendChild(style);
     document.body.appendChild(overlay);
