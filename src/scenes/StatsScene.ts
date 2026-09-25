@@ -7,7 +7,7 @@ import { VocabDeck } from '../vocab/VocabDeck';
 
 const COL_KNOWN = 0x5fcf7f;
 const COL_LEARN = 0xffc857;
-const COL_NEW = 0x4a4270;
+const COL_NEW = 0xe4dfe8;
 
 /** Übersicht: Fortschritt je Schwierigkeitsstufe und Wörter, die oft falsch sind */
 export class StatsScene extends Phaser.Scene {
@@ -27,7 +27,7 @@ export class StatsScene extends Phaser.Scene {
     const L = this.add.container(0, 0).setDepth(DEPTH.overlay + 1);
 
     L.add(makeText(this, cx, top + 52, 'Lernstand', { size: 44, weight: 900 }));
-    const sub = makeText(this, cx, top + 100, ctx.listTitle, { size: 22, weight: 700, color: '#c9bfff', strokeThickness: 0 });
+    const sub = makeText(this, cx, top + 100, ctx.listTitle, { size: 22, weight: 700, color: '#6b5f86', strokeThickness: 0 });
     fitText(sub, DESIGN_W - 120, 22, 14);
     L.add(sub);
 
@@ -46,7 +46,7 @@ export class StatsScene extends Phaser.Scene {
     // Gesamt
     const hs = ctx.prefs.getHighscore();
     L.add(makeText(this, cx, top + 150, `${total.known} sicher · ${total.learning} in Arbeit · ${total.fresh} neu`, { size: 26, weight: 800 }));
-    if (hs && hs.score > 0) L.add(makeText(this, cx, top + 188, `Highscore ${hs.score} · Rekordhöhe ${Math.max(hs.bestMeters ?? 0, hs.meters)} m`, { size: 19, weight: 700, color: '#ffd27a', strokeThickness: 0 }));
+    if (hs && hs.score > 0) L.add(makeText(this, cx, top + 188, `Highscore ${hs.score} · Rekordhöhe ${Math.max(hs.bestMeters ?? 0, hs.meters)} m`, { size: 19, weight: 700, color: '#d17a00', strokeThickness: 0 }));
 
     // je Stufe
     const g = this.add.graphics();
@@ -62,7 +62,7 @@ export class StatsScene extends Phaser.Scene {
       const st = P.stats(es.map((e) => e.id));
       const name = lv ? `Stufe ${lv}` : 'Alle Wörter';
       L.add(makeText(this, 64, y - 12, name, { size: 22, weight: 800 }).setOrigin(0, 0.5));
-      if (lv) L.add(makeText(this, 64, y + 14, LEARNING.levelNames[lv - 1], { size: 16, weight: 600, color: '#c9bfff', strokeThickness: 0 }).setOrigin(0, 0.5));
+      if (lv) L.add(makeText(this, 64, y + 14, LEARNING.levelNames[lv - 1], { size: 16, weight: 600, color: '#6b5f86', strokeThickness: 0 }).setOrigin(0, 0.5));
       const w1 = (barW * st.known) / st.total;
       const w2 = (barW * st.learning) / st.total;
       g.fillStyle(COL_NEW, 1).fillRoundedRect(barX, y - 14, barW, 28, 10);
@@ -80,7 +80,7 @@ export class StatsScene extends Phaser.Scene {
     let lx = 64;
     for (const [col, label] of legend) {
       g.fillStyle(col, 1).fillRoundedRect(lx, y - 8, 18, 18, 5);
-      const t = makeText(this, lx + 26, y, label, { size: 16, weight: 600, strokeThickness: 0, color: '#e9e2ff' }).setOrigin(0, 0.5);
+      const t = makeText(this, lx + 26, y, label, { size: 16, weight: 600, strokeThickness: 0, color: '#4a4058' }).setOrigin(0, 0.5);
       L.add(t);
       lx += 26 + t.width + 22;
     }
@@ -92,14 +92,14 @@ export class StatsScene extends Phaser.Scene {
       .filter((x) => x.p && x.p.wrong > 0)
       .sort((a, b) => b.p!.wrong - a.p!.wrong || (a.p!.box - b.p!.box))
       .slice(0, 7);
-    L.add(makeText(this, cx, y, trouble.length ? 'Oft falsch' : 'Noch keine Fehler – weiter so!', { size: 22, weight: 800, color: trouble.length ? '#ffd27a' : '#9dffb4', strokeThickness: 0 }));
+    L.add(makeText(this, cx, y, trouble.length ? 'Oft falsch' : 'Noch keine Fehler – weiter so!', { size: 22, weight: 800, color: trouble.length ? '#d17a00' : '#2f8a45', strokeThickness: 0 }));
     y += 40;
     for (const { e, p } of trouble) {
       const t = makeText(this, 70, y, `${e.source}  →  ${e.target}`, { size: 20, weight: 700, strokeThickness: 3 }).setOrigin(0, 0.5);
       fitText(t, DESIGN_W - 250, 20, 13);
       const mark = p!.box >= KNOWN_BOX ? '✓' : '';
       L.add(t);
-      L.add(makeText(this, DESIGN_W - 70, y, `✗${p!.wrong}  ✓${p!.right} ${mark}`, { size: 18, weight: 800, color: '#ffb3b3', strokeThickness: 3 }).setOrigin(1, 0.5));
+      L.add(makeText(this, DESIGN_W - 70, y, `✗${p!.wrong}  ✓${p!.right} ${mark}`, { size: 18, weight: 800, color: '#c8323c', strokeThickness: 3 }).setOrigin(1, 0.5));
       y += 34;
     }
 
@@ -108,7 +108,7 @@ export class StatsScene extends Phaser.Scene {
       this.scene.stop();
       this.scene.resume('Menu');
     };
-    L.add(makeButton(this, cx - 120, bottom - 50, 220, 64, 'Zurück', back, { size: 26, color: 0x2f7a47 }).container);
+    L.add(makeButton(this, cx - 120, bottom - 50, 220, 64, 'Zurück', back, { size: 26, color: 0x9be07a }).container);
     let armed = false;
     const reset = makeButton(this, cx + 120, bottom - 50, 220, 64, 'Zurücksetzen', () => {
       if (!armed) {

@@ -47,13 +47,13 @@ export class NeutralPlank implements Landable {
       this.img.setTint(0xffc94d);
       this.glow = scene.add
         .image(x, worldY(h) + 2, 'fx_glow')
-        .setBlendMode(Phaser.BlendModes.ADD)
+        .setBlendMode(Phaser.BlendModes.NORMAL)
         .setTint(0xffb020)
         .setDisplaySize(width * 1.9, 110)
         .setDepth(DEPTH.platforms - 0.1);
-      scene.tweens.add({ targets: this.glow, alpha: { from: 0.55, to: 1 }, duration: 480, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+      scene.tweens.add({ targets: this.glow, alpha: { from: 0.25, to: 0.55 }, duration: 480, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
       // hüpfende Pfeile nach oben
-      this.arrows = makePlainText(scene, x, worldY(h) - 26, '▲ ▲ ▲', 20, '#ffd27a', '#6a3b00').setDepth(DEPTH.platforms + 0.2);
+      this.arrows = makePlainText(scene, x, worldY(h) - 26, '▲ ▲ ▲', 20, '#d17a00', '#6a3b00').setDepth(DEPTH.platforms + 0.2);
       scene.tweens.add({ targets: this.arrows, y: worldY(h) - 40, alpha: { from: 1, to: 0.35 }, duration: 560, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     } else if (special === 'crumble') {
       // bröselnde Planke: morsches, graubraunes Holz, wackelt leicht
@@ -87,8 +87,8 @@ export class NeutralPlank implements Landable {
         speed: { min: 150, max: 380 },
         angle: { min: 230, max: 310 },
         scale: { start: 0.5, end: 0 },
-        tint: [0xffd27a, 0xffffff],
-        blendMode: Phaser.BlendModes.ADD,
+        tint: [0xffd27a, 0x4a64c8],
+        blendMode: Phaser.BlendModes.NORMAL,
       });
       sparks.setDepth(DEPTH.fx);
       sparks.explode(18);
@@ -164,7 +164,7 @@ function makePlainText(scene: Phaser.Scene, x: number, y: number, text: string, 
     .text(x, y, text, {
       fontFamily: PLANK_FONT_FAMILY,
       fontSize: `${size}px`,
-      fontStyle: '900',
+      fontStyle: 'normal',
       color,
       stroke,
       strokeThickness: 4,
@@ -188,7 +188,7 @@ export class Berry {
     const wy = worldY(h);
     this.glow = scene.add
       .image(x, wy, 'fx_glow')
-      .setBlendMode(Phaser.BlendModes.ADD)
+      .setBlendMode(Phaser.BlendModes.NORMAL)
       .setTint(0x9fb4ff)
       .setDisplaySize(76, 56)
       .setAlpha(0.45)
@@ -219,8 +219,8 @@ export class Berry {
       speed: { min: 80, max: 220 },
       angle: { min: 0, max: 360 },
       scale: { start: 0.4, end: 0 },
-      tint: [0xb9c8ff, 0xffffff],
-      blendMode: Phaser.BlendModes.ADD,
+      tint: [0xb9c8ff, 0x4a64c8],
+      blendMode: Phaser.BlendModes.NORMAL,
     });
     sparks.setDepth(DEPTH.fx);
     sparks.explode(12);
@@ -273,7 +273,7 @@ export class WordPlank implements Landable {
     const s = PLANK_WORD.displayHeight / PLANK_WORD.height;
     this.halfWidth = width / 2;
 
-    this.glow = scene.add.image(0, 0, 'fx_glow').setBlendMode(Phaser.BlendModes.ADD).setAlpha(0).setTint(0x5dff84);
+    this.glow = scene.add.image(0, 0, 'fx_glow').setBlendMode(Phaser.BlendModes.NORMAL).setAlpha(0).setTint(0x5dff84);
     // 3-Slice: linke/rechte Kappe fest, Mitte gedehnt (Maserung läuft waagrecht)
     const tex = scene.textures.get(PLANK_WORD.key);
     const L = PLANK_WORD.sliceLeft;
@@ -300,7 +300,7 @@ export class WordPlank implements Landable {
     this.label = scene.add.text(0, faceCenter, text, {
       fontFamily: PLANK_FONT_FAMILY,
       fontSize: `${fontSize}px`,
-      fontStyle: '800',
+      fontStyle: 'normal',
       color: WORD_PLANK.textColor,
       stroke: WORD_PLANK.strokeColor,
       strokeThickness: WORD_PLANK.strokeThickness,
@@ -324,7 +324,7 @@ export class WordPlank implements Landable {
     this.glow.setAlpha(0);
     this.scene.tweens.add({
       targets: this.glow,
-      alpha: { from: 0, to: peak },
+      alpha: { from: 0, to: peak * 0.6 }, // auf Papier wie ein Textmarker, nicht als Leuchten
       duration,
       yoyo: true,
       repeat,

@@ -4,18 +4,71 @@ import { PLANK_FONT_FAMILY } from '../level/rowLayout';
 
 export const UI_FONT = PLANK_FONT_FAMILY;
 
+/**
+ * Farben für den Kritzel-Look: dunkle Tinte auf hellem Papier.
+ * (Die Namen cream/brown sind historisch: cream = Textfarbe, brown = Kontur.)
+ */
 export const COLORS = {
-  cream: '#FFF6E1',
-  brown: '#32190E',
-  panel: 0x1a1440,
-  panelStroke: 0xfff6e1,
+  cream: '#2b2230',
+  brown: '#fffdf5',
+  ink: 0x2b2230,
+  paper: 0xfffdf6,
+  panel: 0xfffdf6,
+  panelStroke: 0x2b2230,
   accent: 0x6fd58a,
-  accentDark: 0x2f7a47,
-  button: 0x3a2868,
-  buttonActive: 0xe89276,
-  heart: '#ff5a72',
-  heartLost: '#5a4a78',
+  accentDark: 0x9be07a,
+  button: 0xfff1b8,
+  buttonActive: 0xffb27a,
+  heart: '#e0485a',
+  heartLost: '#c9c0cf',
 };
+
+/** Leicht wackeliges, abgerundetes Rechteck wie mit Filzstift gezeichnet */
+export function sketchRect(
+  g: Phaser.GameObjects.Graphics,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number,
+  o: { fill?: number; fillAlpha?: number; stroke?: number; width?: number; seed?: number } = {},
+): void {
+  let seed = o.seed ?? Math.round(x * 7 + y * 13 + w * 3 + h);
+  const rnd = () => ((seed = (seed * 16807 + 11) % 2147483647) / 2147483647) - 0.5;
+  r = Math.min(r, w / 2, h / 2);
+  const pts: Phaser.Math.Vector2[] = [];
+  const corner = (cx: number, cy: number, a0: number) => {
+    for (let i = 0; i <= 6; i++) {
+      const a = a0 + (i / 6) * (Math.PI / 2);
+      pts.push(new Phaser.Math.Vector2(cx + Math.cos(a) * r, cy + Math.sin(a) * r));
+    }
+  };
+  const edge = (x0: number, y0: number, x1: number, y1: number) => {
+    const n = Math.max(2, Math.round(Math.hypot(x1 - x0, y1 - y0) / 40));
+    for (let i = 1; i < n; i++) pts.push(new Phaser.Math.Vector2(x0 + ((x1 - x0) * i) / n + rnd() * 2.2, y0 + ((y1 - y0) * i) / n + rnd() * 2.2));
+  };
+  corner(x + w - r, y + r, -Math.PI / 2);
+  edge(x + w, y + r, x + w, y + h - r);
+  corner(x + w - r, y + h - r, 0);
+  edge(x + w - r, y + h, x + r, y + h);
+  corner(x + r, y + h - r, Math.PI / 2);
+  edge(x, y + h - r, x, y + r);
+  corner(x + r, y + r, Math.PI);
+  edge(x + r, y, x + w - r, y);
+  if (o.fill !== undefined) {
+    g.fillStyle(o.fill, o.fillAlpha ?? 1);
+    g.fillPoints(pts, true);
+  }
+  const width = o.width ?? 4;
+  g.lineStyle(width, o.stroke ?? COLORS.ink, 1);
+  g.strokePoints(pts, true);
+  // zweiter, versetzter Strich wie beim schnellen Nachziehen
+  g.lineStyle(Math.max(1, width * 0.45), o.stroke ?? COLORS.ink, 0.55);
+  g.beginPath();
+  g.moveTo(pts[0].x + 1.5, pts[0].y - 1);
+  for (let i = 1; i < Math.min(pts.length, 12); i++) g.lineTo(pts[i].x + 1.5, pts[i].y - 1);
+  g.strokePath();
+}
 
 /** Render-Skalierung für HiDPI (Design 720×1280 → Canvas 720k×1280k) */
 export function renderScale(scene: Phaser.Scene): number {
@@ -52,10 +105,11 @@ export function makeText(scene: Phaser.Scene, x: number, y: number, text: string
   const t = scene.add.text(x, y, text, {
     fontFamily: UI_FONT,
     fontSize: `${size}px`,
-    fontStyle: String(o.weight ?? 800),
+    // Handschrift hat nur einen Schnitt; kein künstlicher Fettdruck
+    fontStyle: 'normal',
     color: o.color ?? COLORS.cream,
     stroke: o.stroke ?? COLORS.brown,
-    strokeThickness: o.strokeThickness ?? Math.max(0, Math.round(size / 6)),
+    strokeThickness: Math.round((o.strokeThickness ?? Math.max(0, Math.round(size / 6))) * 0.6),
     align: o.align ?? 'center',
     wordWrap: o.wrapWidth ? { width: o.wrapWidth, useAdvancedWrap: true } : undefined,
     padding: { x: 4, y: Math.ceil(size * 0.18) },
@@ -72,7 +126,7 @@ export function fitText(t: Phaser.GameObjects.Text, maxWidth: number, maxSize: n
   while (t.width > maxWidth && size > minSize) {
     size -= 2;
     t.setFontSize(size);
-    t.setStroke(COLORS.brown, Math.max(3, Math.round(size / 6)));
+    t.setStroke(COLORS.brown, Math.max(2, Math.round(size / 10)));
   }
   if (t.width > maxWidth) t.setScale(maxWidth / t.width);
   else t.setScale(1);
@@ -88,10 +142,10 @@ export function panel(
   alpha = 0.82,
 ): Phaser.GameObjects.Graphics {
   const g = scene.add.graphics();
-  g.fillStyle(COLORS.panel, alpha);
-  g.fillRoundedRect(x, y, w, h, radius);
-  g.lineStyle(3, COLORS.panelStroke, 0.22);
-  g.strokeRoundedRect(x, y, w, h, radius);
+  // Zettel mit leichtem Schatten, Filzstiftrand
+  g.fillStyle(COLORS.ink, 0.1);
+  g.fillRoundedRect(x + 6, y + 8, w, h, radius * 0.6);
+  sketchRect(g, x, y, w, h, radius * 0.6, { fill: COLORS.panel, fillAlpha: Math.max(alpha, 0.94), width: 4 });
   return g;
 }
 
@@ -118,12 +172,10 @@ export function makeButton(
   const draw = (pressed = false) => {
     g.clear();
     const col = active ? activeCol : base;
-    g.fillStyle(0x000000, 0.25);
-    g.fillRoundedRect(-w / 2, -h / 2 + 5, w, h, h / 2.6);
-    g.fillStyle(col, 1);
-    g.fillRoundedRect(-w / 2, -h / 2 + (pressed ? 3 : 0), w, h, h / 2.6);
-    g.lineStyle(3, 0xfff6e1, active ? 0.8 : 0.3);
-    g.strokeRoundedRect(-w / 2, -h / 2 + (pressed ? 3 : 0), w, h, h / 2.6);
+    const dy = pressed ? 3 : 0;
+    g.fillStyle(COLORS.ink, 0.85);
+    g.fillRoundedRect(-w / 2 + 3, -h / 2 + 6, w, h, h / 3);
+    sketchRect(g, -w / 2, -h / 2 + dy, w, h, h / 3, { fill: col, width: active ? 5 : 4, seed: Math.round(w * 3 + h) });
   };
   draw();
   const size = o.size ?? 30;
@@ -158,5 +210,6 @@ export function makeButton(
 
 /** Dunkle Abdeckung über das ganze Bild */
 export function dimmer(scene: Phaser.Scene, alpha = 0.55): Phaser.GameObjects.Rectangle {
-  return scene.add.rectangle(0, 0, DESIGN_W, DESIGN_H, 0x06051a, alpha).setOrigin(0).setScrollFactor(0);
+  // Papier-Schleier statt dunkler Abdeckung
+  return scene.add.rectangle(0, 0, DESIGN_W, DESIGN_H, 0xfaf7ef, Math.min(0.8, alpha + 0.15)).setOrigin(0).setScrollFactor(0);
 }

@@ -36,7 +36,15 @@ export const ASSET_FILES = {
   cloud2: 'bg/sky/cloud2.png',
   cloud3: 'bg/sky/cloud3.png',
   moon: 'bg/sky/moon.png',
+  star: 'bg/sky/star.png',
+  aurora_band: 'bg/sky/aurora_band.png',
+
+  // Karopapier (kachelbar)
+  paper: 'bg/paper_tile.png',
 } as const;
+
+/** Handschrift (SIL OFL 1.1, assets/fonts/OFL-Patrick-Hand.txt) */
+export const FONT_FILE = { family: 'Patrick Hand', path: 'fonts/patrick-hand.woff2' };
 
 export type AssetKey = keyof typeof ASSET_FILES;
 

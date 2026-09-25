@@ -1,10 +1,10 @@
 import { DESIGN_W, WORD_PLANK } from '../config/tuning';
 
-export const PLANK_FONT_FAMILY = `system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif`;
+export const PLANK_FONT_FAMILY = `"Patrick Hand", "Comic Sans MS", "Segoe Print", system-ui, sans-serif`;
 
 let measureCtx: CanvasRenderingContext2D | null = null;
 
-export function measureText(text: string, fontSize: number, weight = 800): number {
+export function measureText(text: string, fontSize: number, weight = 400): number {
   if (!measureCtx && typeof document !== 'undefined') measureCtx = document.createElement('canvas').getContext('2d');
   if (!measureCtx) return text.length * fontSize * 0.6;
   measureCtx.font = `${weight} ${fontSize}px ${PLANK_FONT_FAMILY}`;

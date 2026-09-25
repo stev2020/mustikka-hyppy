@@ -27,7 +27,7 @@ import { Background } from '../render/Background';
 import { THEMES } from '../config/themes';
 import { Berry, NeutralPlank, WordPlank, worldY, type Landable } from '../render/Platforms';
 import type { Highscore } from '../config/settings';
-import { COLORS, fitText, makeButton, makeText, panel, setupCamera } from '../render/ui';
+import { COLORS, fitText, makeButton, makeText, panel, setupCamera, sketchRect } from '../render/ui';
 import type { AnswerRecord, RoundResult, VocabEntry } from '../vocab/types';
 import { VocabDeck } from '../vocab/VocabDeck';
 import { KNOWN_BOX } from '../vocab/Progress';
@@ -195,7 +195,7 @@ export class GameScene extends Phaser.Scene {
       (window as unknown as Record<string, unknown>).__mustikka = this;
     }
 
-    this.cameras.main.fadeIn(350, 6, 5, 26);
+    this.cameras.main.fadeIn(350, 250, 247, 239);
 
     // Bildschirm während der Runde nicht abschalten lassen
     keepScreenOn(true);
@@ -221,7 +221,7 @@ export class GameScene extends Phaser.Scene {
     hud.add([this.berryIcon, this.berryText]);
     this.scoreText = makeText(this, 432, 52, '', { size: 25, weight: 700 });
     hud.add(this.scoreText);
-    this.streakText = makeText(this, DESIGN_W - 40, 92, '', { size: 18, weight: 800, color: '#ffd27a', strokeThickness: 3 }).setOrigin(1, 0.5);
+    this.streakText = makeText(this, DESIGN_W - 40, 92, '', { size: 18, weight: 800, color: '#d17a00', strokeThickness: 3 }).setOrigin(1, 0.5);
     hud.add(this.streakText);
 
     const pause = makeButton(this, DESIGN_W - 66, 52, 76, 52, 'II', () => this.openPause(), { size: 26 });
@@ -229,7 +229,7 @@ export class GameScene extends Phaser.Scene {
 
     const from = languageName(this.ctx.settings.direction === 'forward' ? this.ctx.meta.sourceLang ?? this.ctx.settings.sourceLang : this.ctx.meta.targetLang ?? this.ctx.settings.targetLang);
     const to = languageName(this.ctx.settings.direction === 'forward' ? this.ctx.meta.targetLang ?? this.ctx.settings.targetLang : this.ctx.meta.sourceLang ?? this.ctx.settings.sourceLang);
-    this.promptHint = makeText(this, DESIGN_W / 2, 92, `${from} → ${to}`, { size: 18, weight: 600, color: '#c9bfff', strokeThickness: 0 });
+    this.promptHint = makeText(this, DESIGN_W / 2, 92, `${from} → ${to}`, { size: 18, weight: 600, color: '#6b5f86', strokeThickness: 0 });
     this.promptText = makeText(this, DESIGN_W / 2, 132, '', { size: 50, weight: 900 });
     hud.add([this.promptHint, this.promptText]);
     this.updateHud();
@@ -272,15 +272,14 @@ export class GameScene extends Phaser.Scene {
     const w = Math.min(DESIGN_W - 50, Math.max(320, word.displayWidth + 100));
     const h = o.label ? 176 : 132;
 
-    const glow = this.add.image(0, 0, 'fx_glow').setBlendMode(Phaser.BlendModes.ADD).setTint(o.glow ?? 0xffd27a);
+    const glow = this.add.image(0, 0, 'fx_glow').setBlendMode(Phaser.BlendModes.NORMAL).setTint(o.glow ?? 0xffd27a);
     glow.setDisplaySize(w * 1.6, h * 2.4).setAlpha(0.5);
     const bg = this.add.graphics();
-    bg.fillStyle(COLORS.panel, 0.8);
-    bg.fillRoundedRect(-w / 2, -h / 2, w, h, 36);
-    bg.lineStyle(3, 0xfff6e1, 0.35);
-    bg.strokeRoundedRect(-w / 2, -h / 2, w, h, 36);
+    bg.fillStyle(COLORS.ink, 0.1);
+    bg.fillRoundedRect(-w / 2 + 6, -h / 2 + 8, w, h, 24);
+    sketchRect(bg, -w / 2, -h / 2, w, h, 24, { fill: COLORS.panel, width: 4 });
     parts.push(glow, bg);
-    if (o.label) parts.push(makeText(this, 0, -46, o.label, { size: 22, weight: 700, color: '#c9bfff', strokeThickness: 0 }));
+    if (o.label) parts.push(makeText(this, 0, -46, o.label, { size: 22, weight: 700, color: '#6b5f86', strokeThickness: 0 }));
     parts.push(word);
 
     if (this.announcementsShown++ > 0) this.ctx.sfx.play('whoosh');
@@ -300,8 +299,8 @@ export class GameScene extends Phaser.Scene {
       angle: { min: 0, max: 360 },
       scale: { start: 0.55, end: 0 },
       alpha: { start: 1, end: 0 },
-      tint: [o.glow ?? 0xffe39a, 0xffffff],
-      blendMode: Phaser.BlendModes.ADD,
+      tint: [o.glow ?? 0xffe39a, 0x4a64c8],
+      blendMode: Phaser.BlendModes.NORMAL,
       emitZone: { type: 'edge', source: new Phaser.Geom.Rectangle(-w / 2, -h / 2, w, h) as unknown as Phaser.Types.GameObjects.Particles.EdgeZoneSource, quantity: 22 },
     });
     sparks.setScrollFactor(0).setDepth(DEPTH.hud - 1);
@@ -329,7 +328,7 @@ export class GameScene extends Phaser.Scene {
 
   /** kleiner Hinweis unter der Anzeige, sobald der Rekord geknackt ist */
   private highscoreToast(): void {
-    const t = makeText(this, DESIGN_W / 2, HUD_H + 40, 'Neuer Highscore!', { size: 34, weight: 900, color: '#ffd27a', strokeThickness: 7 });
+    const t = makeText(this, DESIGN_W / 2, HUD_H + 40, 'Neuer Highscore!', { size: 34, weight: 900, color: '#d17a00', strokeThickness: 7 });
     t.setScrollFactor(0).setDepth(DEPTH.hud).setScale(0.4).setAlpha(0);
     this.tweens.add({ targets: t, scale: 1, alpha: 1, duration: 320, ease: 'Back.Out' });
     this.tweens.add({ targets: t, angle: { from: -3, to: 3 }, duration: 160, yoyo: true, repeat: 3, ease: 'Sine.InOut' });
@@ -340,8 +339,8 @@ export class GameScene extends Phaser.Scene {
       speed: { min: 120, max: 300 },
       angle: { min: 0, max: 360 },
       scale: { start: 0.5, end: 0 },
-      tint: [0xffd27a, 0xffffff],
-      blendMode: Phaser.BlendModes.ADD,
+      tint: [0xffd27a, 0x4a64c8],
+      blendMode: Phaser.BlendModes.NORMAL,
     });
     sparks.setScrollFactor(0).setDepth(DEPTH.hud);
     sparks.explode(26);
@@ -588,11 +587,11 @@ export class GameScene extends Phaser.Scene {
       this.ctx.sfx.play('heartUp');
       t.setScale(2);
       this.tweens.add({ targets: t, scale: 1, duration: 450, ease: 'Back.Out' });
-      this.floatText(DESIGN_W / 2, worldY(this.ph) - 150, '+1 Herz!', '#ff8fa3');
+      this.floatText(DESIGN_W / 2, worldY(this.ph) - 150, '+1 Herz!', '#d6455d');
     } else {
       this.score += SPECIALS.berryBonusPoints;
       this.ctx.sfx.play('heartUp');
-      this.floatText(DESIGN_W / 2, worldY(this.ph) - 150, `+${SPECIALS.berryBonusPoints} Beerenbonus!`, '#c9d4ff');
+      this.floatText(DESIGN_W / 2, worldY(this.ph) - 150, `+${SPECIALS.berryBonusPoints} Beerenbonus!`, '#3f5bc4');
     }
   }
 
@@ -631,10 +630,10 @@ export class GameScene extends Phaser.Scene {
       this.ctx.sfx.play('streak');
       this.bg.flare(this.streak >= 10 ? 1 : 0.75);
       this.sparkleRain(this.streak >= 10 ? 70 : 45);
-      this.time.delayedCall(250, () => this.floatText(DESIGN_W / 2, worldY(p.h) - 120, `${this.streak} richtig in Folge!`, '#ffd27a'));
+      this.time.delayedCall(250, () => this.floatText(DESIGN_W / 2, worldY(p.h) - 120, `${this.streak} richtig in Folge!`, '#d17a00'));
     }
     this.score += pts;
-    this.floatText(p.x, worldY(p.h) - 40, `+${pts}`, '#9dffb4');
+    this.floatText(p.x, worldY(p.h) - 40, `+${pts}`, '#2f8a45');
   }
 
   private answerWrong(row: Row, p: WordPlank): void {
@@ -664,8 +663,8 @@ export class GameScene extends Phaser.Scene {
     const q = row.spec.question;
     this.promptLockUntil = this.time.now + ANNOUNCE.intro + ANNOUNCE.solutionHold + ANNOUNCE.outro + 50;
     this.shownRowId = -2;
-    this.setPrompt(`${q.prompt} = ${q.answer}`, '#ffd27a');
-    if (this.hearts > 0) this.announce(q.answer, { label: `„${q.prompt}“ heißt`, color: '#9dffb4', glow: 0x5dff84, hold: ANNOUNCE.solutionHold });
+    this.setPrompt(`${q.prompt} = ${q.answer}`, '#d17a00');
+    if (this.hearts > 0) this.announce(q.answer, { label: `„${q.prompt}“ heißt`, color: '#2f8a45', glow: 0x5dff84, hold: ANNOUNCE.solutionHold });
 
     if (this.hearts <= 0) {
       this.dying = true;
@@ -683,8 +682,8 @@ export class GameScene extends Phaser.Scene {
       speedX: { min: -30, max: 30 },
       scale: { start: 0.55, end: 0 },
       alpha: { start: 1, end: 0 },
-      tint: [0xffd27a, 0x9dffb4, 0xa6c8ff, 0xffffff],
-      blendMode: Phaser.BlendModes.ADD,
+      tint: [0xffd27a, 0x9dffb4, 0xa6c8ff, 0x4a64c8],
+      blendMode: Phaser.BlendModes.NORMAL,
       frequency: 25,
       quantity: 2,
     });
