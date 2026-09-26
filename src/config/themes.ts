@@ -2,13 +2,25 @@ import { ASSET_FILES, type AssetKey } from './assets';
 import { SKY_GRADIENT } from './tuning';
 
 /**
- * Aussehen des Spiels. Seit dem Kritzel-Umbau gibt es nur noch ein Thema:
- * alles wie mit Filzstift ins karierte Schulheft gezeichnet (Grafiken aus
- * scripts/doodle/generate.py). Die Struktur bleibt, damit später weitere
- * Themen dazukommen können.
+ * Aussehen des Spiels, beide im Kritzel-Stil (Grafiken aus
+ * scripts/doodle/generate.py):
+ * - "doodle": Filzstift auf hellem Karopapier
+ * - "night": dunkles Nachtheft, heller Gelstift, leuchtende Hüttenfenster
+ *   (Hintergründe in assets/night/, erzeugt mit `npm run doodle-assets`)
+ * Figur und Planken sind in beiden Themen gleich.
  */
-export type ThemeId = 'doodle';
-export const THEME_IDS: ThemeId[] = ['doodle'];
+export type ThemeId = 'doodle' | 'night';
+export const THEME_IDS: ThemeId[] = ['doodle', 'night'];
+
+/** Ohne gespeicherte Wahl: dem hellen/dunklen Modus des Geräts folgen */
+export function defaultTheme(): ThemeId {
+  try {
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches) return 'night';
+  } catch {
+    /* egal */
+  }
+  return 'doodle';
+}
 
 export interface SkyStop {
   h: number;
@@ -38,7 +50,7 @@ export interface Theme {
 export const THEMES: Record<ThemeId, Theme> = {
   doodle: {
     id: 'doodle',
-    label: 'Kritzel',
+    label: 'Hell',
     bgDir: '',
     sky: SKY_GRADIENT,
     stars: 0.35,
@@ -47,6 +59,18 @@ export const THEMES: Record<ThemeId, Theme> = {
     sun: false,
     windowGlow: 0,
     pageBackground: '#faf7ef',
+  },
+  night: {
+    id: 'night',
+    label: 'Dunkel',
+    bgDir: 'night/',
+    sky: SKY_GRADIENT,
+    stars: 0.65,
+    aurora: 1,
+    moon: true,
+    sun: false,
+    windowGlow: 1,
+    pageBackground: '#1c2042',
   },
 };
 
@@ -65,6 +89,9 @@ export const THEMED_ASSETS: AssetKey[] = [
   'cloud1',
   'cloud2',
   'cloud3',
+  'moon',
+  'star',
+  'paper',
 ];
 
 const themedSet = new Set<string>(THEMED_ASSETS);
