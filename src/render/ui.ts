@@ -4,24 +4,106 @@ import { PLANK_FONT_FAMILY } from '../level/rowLayout';
 
 export const UI_FONT = PLANK_FONT_FAMILY;
 
+import type { ThemeId } from '../config/themes';
+
 /**
- * Farben für den Kritzel-Look: dunkle Tinte auf hellem Papier.
+ * Farben für den Kritzel-Look je Thema.
+ * Hell: dunkle Tinte auf hellem Papier. Dunkel: heller Gelstift auf dunklem Nachtheft.
  * (Die Namen cream/brown sind historisch: cream = Textfarbe, brown = Kontur.)
+ * Knöpfe bleiben in beiden Themen helle Klebezettel mit dunkler Schrift.
  */
-export const COLORS = {
-  cream: '#2b2230',
-  brown: '#fffdf5',
-  ink: 0x2b2230,
-  paper: 0xfffdf6,
-  panel: 0xfffdf6,
-  panelStroke: 0x2b2230,
-  accent: 0x6fd58a,
-  accentDark: 0x9be07a,
-  button: 0xfff1b8,
-  buttonActive: 0xffb27a,
-  heart: '#e0485a',
-  heartLost: '#c9c0cf',
+const PALETTES = {
+  doodle: {
+    cream: '#2b2230',
+    brown: '#fffdf5',
+    ink: 0x2b2230,
+    paper: 0xfffdf6,
+    panel: 0xfffdf6,
+    panelStroke: 0x2b2230,
+    shadow: 0x2b2230,
+    shadowAlpha: 0.1,
+    accent: 0x6fd58a,
+    accentDark: 0x9be07a,
+    button: 0xfff1b8,
+    buttonActive: 0xffb27a,
+    buttonText: '#2b2230',
+    buttonTextStroke: '#fffdf5',
+    buttonStroke: 0x2b2230,
+    heart: '#e0485a',
+    heartLost: '#c9c0cf',
+    /** Beschriftungen, Untertitel */
+    muted: '#6b5f86',
+    text2: '#4a4058',
+    faint: '#857a9e',
+    subtitle: '#6b4a3a',
+    orange: '#d17a00',
+    green: '#2f8a45',
+    red: '#c8323c',
+    heartPlus: '#d6455d',
+    blue: '#3f5bc4',
+    /** Schleier hinter Menüs */
+    veil: 0xfaf7ef,
+    /** leicht getönte Fläche (Listen, Vorschau) */
+    tint: 0x2b2230,
+    tintAlpha: 0.06,
+    /** Kamera-Einblendung (RGB) */
+    fade: [250, 247, 239] as [number, number, number],
+    canvas: '#faf7ef',
+  },
+  night: {
+    cream: '#f1edfb',
+    brown: '#1c2042',
+    ink: 0xeeeafa,
+    paper: 0x262b58,
+    panel: 0x262b58,
+    panelStroke: 0xeeeafa,
+    shadow: 0x05061a,
+    shadowAlpha: 0.45,
+    accent: 0x6fd58a,
+    accentDark: 0x9be07a,
+    button: 0xfff1b8,
+    buttonActive: 0xffb27a,
+    buttonText: '#2b2230',
+    buttonTextStroke: '#fffdf5',
+    buttonStroke: 0x0d0f26,
+    heart: '#ff6b7c',
+    heartLost: '#565a86',
+    muted: '#b7b0dc',
+    text2: '#d6d1ee',
+    faint: '#9a94c4',
+    subtitle: '#ffd98a',
+    orange: '#ffb347',
+    green: '#7fe39a',
+    red: '#ff7a82',
+    heartPlus: '#ff7a8e',
+    blue: '#9fb4ff',
+    veil: 0x14173a,
+    tint: 0xffffff,
+    tintAlpha: 0.07,
+    fade: [28, 32, 66] as [number, number, number],
+    canvas: '#1c2042',
+  },
 };
+
+type Palette = (typeof PALETTES)['doodle'];
+
+/** Aktuelle Farben; werden beim Themenwechsel ausgetauscht (vor dem Neuaufbau der Szenen) */
+export const COLORS: Palette = { ...PALETTES.doodle };
+
+export function applyUiTheme(theme: ThemeId): void {
+  Object.assign(COLORS, PALETTES[theme]);
+}
+
+/** Kamera sanft in der Papierfarbe des Themas einblenden */
+export function fadeInCamera(scene: Phaser.Scene, ms: number): void {
+  const [r, g, b] = COLORS.fade;
+  scene.cameras.main.fadeIn(ms, r, g, b);
+}
+
+export function fadeOutCamera(scene: Phaser.Scene, ms: number): void {
+  const [r, g, b] = COLORS.fade;
+  scene.cameras.main.fadeOut(ms, r, g, b);
+}
 
 /** Leicht wackeliges, abgerundetes Rechteck wie mit Filzstift gezeichnet */
 export function sketchRect(
@@ -126,7 +208,7 @@ export function fitText(t: Phaser.GameObjects.Text, maxWidth: number, maxSize: n
   while (t.width > maxWidth && size > minSize) {
     size -= 2;
     t.setFontSize(size);
-    t.setStroke(COLORS.brown, Math.max(2, Math.round(size / 10)));
+    t.setStroke(String(t.style.stroke ?? COLORS.brown), Math.max(2, Math.round(size / 10)));
   }
   if (t.width > maxWidth) t.setScale(maxWidth / t.width);
   else t.setScale(1);
@@ -143,7 +225,7 @@ export function panel(
 ): Phaser.GameObjects.Graphics {
   const g = scene.add.graphics();
   // Zettel mit leichtem Schatten, Filzstiftrand
-  g.fillStyle(COLORS.ink, 0.1);
+  g.fillStyle(COLORS.shadow, COLORS.shadowAlpha);
   g.fillRoundedRect(x + 6, y + 8, w, h, radius * 0.6);
   sketchRect(g, x, y, w, h, radius * 0.6, { fill: COLORS.panel, fillAlpha: Math.max(alpha, 0.94), width: 4 });
   return g;
@@ -173,13 +255,13 @@ export function makeButton(
     g.clear();
     const col = active ? activeCol : base;
     const dy = pressed ? 3 : 0;
-    g.fillStyle(COLORS.ink, 0.85);
+    g.fillStyle(COLORS.buttonStroke, 0.85);
     g.fillRoundedRect(-w / 2 + 3, -h / 2 + 6, w, h, h / 3);
-    sketchRect(g, -w / 2, -h / 2 + dy, w, h, h / 3, { fill: col, width: active ? 5 : 4, seed: Math.round(w * 3 + h) });
+    sketchRect(g, -w / 2, -h / 2 + dy, w, h, h / 3, { fill: col, stroke: COLORS.buttonStroke, width: active ? 5 : 4, seed: Math.round(w * 3 + h) });
   };
   draw();
   const size = o.size ?? 30;
-  const text = makeText(scene, 0, 0, label, { size });
+  const text = makeText(scene, 0, 0, label, { size, color: COLORS.buttonText, stroke: COLORS.buttonTextStroke });
   fitText(text, w - 22, size, 14);
   const c = scene.add.container(x, y, [g, text]);
   c.setSize(w, h);
@@ -211,5 +293,5 @@ export function makeButton(
 /** Dunkle Abdeckung über das ganze Bild */
 export function dimmer(scene: Phaser.Scene, alpha = 0.55): Phaser.GameObjects.Rectangle {
   // Papier-Schleier statt dunkler Abdeckung
-  return scene.add.rectangle(0, 0, DESIGN_W, DESIGN_H, 0xfaf7ef, Math.min(0.8, alpha + 0.15)).setOrigin(0).setScrollFactor(0);
+  return scene.add.rectangle(0, 0, DESIGN_W, DESIGN_H, COLORS.veil, Math.min(0.8, alpha + 0.15)).setOrigin(0).setScrollFactor(0);
 }

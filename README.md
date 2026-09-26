@@ -64,6 +64,7 @@ Nützliche URL-Parameter für das Testspiel:
 | Parameter | Wirkung |
 |---|---|
 | `?tempo=slow\|normal\|fast` | Tempo vorgeben |
+| `?theme=doodle\|night` | Aussehen Hell / Dunkel vorgeben |
 | `?direction=reverse` | Finnisch → Deutsch |
 | `?levels=1` / `?levels=1,2` | nur diese Vokabel-Level |
 | `?categories=tiere,natur` | nur diese Kategorien |
@@ -85,9 +86,15 @@ Sternchen und Polarlicht.
 - **Papier:** `assets/bg/paper_tile.png` ist kachelbar und wandert mit den
   Plattformen nach unten.
 - **Schrift:** Patrick Hand (SIL OFL 1.1, `assets/fonts/`), wird beim Start geladen.
+- **Hell / Dunkel:** im Startmenü unter „Aussehen“ umschaltbar (Taste **T**), die
+  Wahl wird gespeichert. Ohne gespeicherte Wahl folgt das Spiel dem hellen/dunklen
+  Modus des Geräts. **Dunkel** ist ein Nachtheft: dunkelblaues Karopapier, heller
+  Gelstift, leuchtende Hüttenfenster, mehr Sterne und kräftigeres Polarlicht. Die
+  Hintergründe dafür liegen in `assets/night/` (gleicher Generator,
+  `DOODLE_THEME=night`); Figur und Planken sind in beiden Themen gleich. Die
+  Farben von Menüs und Anzeige stehen je Thema in `src/render/ui.ts`.
 - **Frühere Grafiken:** die gemalten Abend-/Tag-Grafiken liegen unverändert in
-  `art/original/` (nicht mehr ausgeliefert). Die Tageszeit-Wahl entfällt; die
-  Themen-Struktur in `src/config/themes.ts` bleibt für spätere Varianten.
+  `art/original/` (nicht mehr ausgeliefert).
 
 ## Einbettung (Lern-App)
 
@@ -259,7 +266,7 @@ src/
   config/assets.ts      ALLE Asset-Pfade + Bildgeometrie (Anker, Laufflächen, Slice-Ränder)
   config/tuning.ts      Physik, Tempo, Level, Schwierigkeit, Welten, Himmelsfarben
   config/settings.ts    Einstellungen + lokale Speicherung (Tempo, Tageszeit, Neigung)
-  config/themes.ts      Aussehen (Kritzel-Thema): Sterne, Polarlicht, Mond
+  config/themes.ts      Aussehen Hell/Dunkel: Hintergrund-Ordner, Sterne, Polarlicht, Mond
   vocab/                Datenformat, Auswahl der Wörter, Ablenker, Wiederholungen, Lernstand
   level/                Level-Generator mit Erreichbarkeits-Garantien, Reihen-Layout
   import/               Anki-Import (.apkg/.txt), Aufräumen, gespeicherte Wortlisten
@@ -290,7 +297,7 @@ const game = createMustikkaHyppy({
     levels: [1, 2],
     categories: ['tiere', 'haus'],
     tempo: 'normal',                   // 'slow' | 'normal' | 'fast'
-    theme: 'doodle',                   // einziges Thema
+    theme: 'night',                    // 'doodle' (hell) | 'night' (dunkel); weglassen = Gerät/gespeicherte Wahl
     sound: true,                       // Soundeffekte
     pronunciation: true,               // finnische Wörter vorlesen
     showMenu: false,                   // direkt starten

@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import { DEPTH, DESIGN_H, DESIGN_W, LEARNING } from '../config/tuning';
 import { getCtx } from '../game/context';
-import { dimmer, fitText, makeButton, makeText, panel, setupCamera } from '../render/ui';
+import { COLORS, dimmer, fitText, makeButton, makeText, panel, setupCamera } from '../render/ui';
 import { KNOWN_BOX } from '../vocab/Progress';
 import { VocabDeck } from '../vocab/VocabDeck';
 
@@ -27,7 +27,7 @@ export class StatsScene extends Phaser.Scene {
     const L = this.add.container(0, 0).setDepth(DEPTH.overlay + 1);
 
     L.add(makeText(this, cx, top + 52, 'Lernstand', { size: 44, weight: 900 }));
-    const sub = makeText(this, cx, top + 100, ctx.listTitle, { size: 22, weight: 700, color: '#6b5f86', strokeThickness: 0 });
+    const sub = makeText(this, cx, top + 100, ctx.listTitle, { size: 22, weight: 700, color: COLORS.muted, strokeThickness: 0 });
     fitText(sub, DESIGN_W - 120, 22, 14);
     L.add(sub);
 
@@ -46,7 +46,7 @@ export class StatsScene extends Phaser.Scene {
     // Gesamt
     const hs = ctx.prefs.getHighscore();
     L.add(makeText(this, cx, top + 150, `${total.known} sicher · ${total.learning} in Arbeit · ${total.fresh} neu`, { size: 26, weight: 800 }));
-    if (hs && hs.score > 0) L.add(makeText(this, cx, top + 188, `Highscore ${hs.score} · Rekordhöhe ${Math.max(hs.bestMeters ?? 0, hs.meters)} m`, { size: 19, weight: 700, color: '#d17a00', strokeThickness: 0 }));
+    if (hs && hs.score > 0) L.add(makeText(this, cx, top + 188, `Highscore ${hs.score} · Rekordhöhe ${Math.max(hs.bestMeters ?? 0, hs.meters)} m`, { size: 19, weight: 700, color: COLORS.orange, strokeThickness: 0 }));
 
     // je Stufe
     const g = this.add.graphics();
@@ -62,13 +62,13 @@ export class StatsScene extends Phaser.Scene {
       const st = P.stats(es.map((e) => e.id));
       const name = lv ? `Stufe ${lv}` : 'Alle Wörter';
       L.add(makeText(this, 64, y - 12, name, { size: 22, weight: 800 }).setOrigin(0, 0.5));
-      if (lv) L.add(makeText(this, 64, y + 14, LEARNING.levelNames[lv - 1], { size: 16, weight: 600, color: '#6b5f86', strokeThickness: 0 }).setOrigin(0, 0.5));
+      if (lv) L.add(makeText(this, 64, y + 14, LEARNING.levelNames[lv - 1], { size: 16, weight: 600, color: COLORS.muted, strokeThickness: 0 }).setOrigin(0, 0.5));
       const w1 = (barW * st.known) / st.total;
       const w2 = (barW * st.learning) / st.total;
       g.fillStyle(COL_NEW, 1).fillRoundedRect(barX, y - 14, barW, 28, 10);
       if (w1 + w2 > 0) g.fillStyle(COL_LEARN, 1).fillRoundedRect(barX, y - 14, Math.max(w1 + w2, 12), 28, 10);
       if (w1 > 0) g.fillStyle(COL_KNOWN, 1).fillRoundedRect(barX, y - 14, Math.max(w1, 12), 28, 10);
-      L.add(makeText(this, barX + barW / 2, y, `${st.known} / ${st.total}`, { size: 17, weight: 800, strokeThickness: 3 }));
+      L.add(makeText(this, barX + barW / 2, y, `${st.known} / ${st.total}`, { size: 17, weight: 800, strokeThickness: 3, color: COLORS.buttonText, stroke: COLORS.buttonTextStroke }));
       y += 64;
     }
     // Legende
@@ -80,7 +80,7 @@ export class StatsScene extends Phaser.Scene {
     let lx = 64;
     for (const [col, label] of legend) {
       g.fillStyle(col, 1).fillRoundedRect(lx, y - 8, 18, 18, 5);
-      const t = makeText(this, lx + 26, y, label, { size: 16, weight: 600, strokeThickness: 0, color: '#4a4058' }).setOrigin(0, 0.5);
+      const t = makeText(this, lx + 26, y, label, { size: 16, weight: 600, strokeThickness: 0, color: COLORS.text2 }).setOrigin(0, 0.5);
       L.add(t);
       lx += 26 + t.width + 22;
     }
@@ -92,14 +92,14 @@ export class StatsScene extends Phaser.Scene {
       .filter((x) => x.p && x.p.wrong > 0)
       .sort((a, b) => b.p!.wrong - a.p!.wrong || (a.p!.box - b.p!.box))
       .slice(0, 7);
-    L.add(makeText(this, cx, y, trouble.length ? 'Oft falsch' : 'Noch keine Fehler – weiter so!', { size: 22, weight: 800, color: trouble.length ? '#d17a00' : '#2f8a45', strokeThickness: 0 }));
+    L.add(makeText(this, cx, y, trouble.length ? 'Oft falsch' : 'Noch keine Fehler – weiter so!', { size: 22, weight: 800, color: trouble.length ? COLORS.orange : COLORS.green, strokeThickness: 0 }));
     y += 40;
     for (const { e, p } of trouble) {
       const t = makeText(this, 70, y, `${e.source}  →  ${e.target}`, { size: 20, weight: 700, strokeThickness: 3 }).setOrigin(0, 0.5);
       fitText(t, DESIGN_W - 250, 20, 13);
       const mark = p!.box >= KNOWN_BOX ? '✓' : '';
       L.add(t);
-      L.add(makeText(this, DESIGN_W - 70, y, `✗${p!.wrong}  ✓${p!.right} ${mark}`, { size: 18, weight: 800, color: '#c8323c', strokeThickness: 3 }).setOrigin(1, 0.5));
+      L.add(makeText(this, DESIGN_W - 70, y, `✗${p!.wrong}  ✓${p!.right} ${mark}`, { size: 18, weight: 800, color: COLORS.red, strokeThickness: 3 }).setOrigin(1, 0.5));
       y += 34;
     }
 

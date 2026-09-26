@@ -4,7 +4,7 @@ import { DEFAULT_ASSET_BASE } from '../config/assets';
 import { DESIGN_H, DESIGN_W } from '../config/tuning';
 import { getCtx } from '../game/context';
 import { addSplinterFrames, createFxTextures } from '../render/fxTextures';
-import { makeText, setupCamera } from '../render/ui';
+import { COLORS, makeText, setupCamera } from '../render/ui';
 import { THEMED_ASSETS } from '../config/themes';
 import { queueTheme } from '../render/themeLoader';
 
@@ -21,7 +21,7 @@ export class BootScene extends Phaser.Scene {
     this.load.setPath(base);
 
     const label = makeText(this, DESIGN_W / 2, DESIGN_H / 2, 'Lade …', { size: 34 });
-    const bar = this.add.rectangle(DESIGN_W / 2 - 200, DESIGN_H / 2 + 60, 0, 12, 0x2b2230).setOrigin(0, 0.5);
+    const bar = this.add.rectangle(DESIGN_W / 2 - 200, DESIGN_H / 2 + 60, 0, 12, COLORS.ink).setOrigin(0, 0.5);
     this.load.on('progress', (p: number) => {
       bar.width = 400 * p;
       label.setText(`Lade … ${Math.round(p * 100)} %`);

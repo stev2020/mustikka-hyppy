@@ -10,11 +10,12 @@ import { ImportScene } from '../scenes/ImportScene';
 import { StatsScene } from '../scenes/StatsScene';
 import { normalizeVocabFile, type RoundResult, type VocabFile } from '../vocab/types';
 import { activateList, applyPageBackground, setTempo, type GameContext } from './context';
+import { COLORS, applyUiTheme } from '../render/ui';
 import { BUILTIN_LIST, WordListStore } from '../import/wordLists';
 import { Sfx } from '../audio/Sfx';
 import { Speech, type SpeakFn } from '../audio/Speech';
 import { LocalProgressStore, ProgressTracker, type ProgressStore } from '../vocab/Progress';
-import { THEME_IDS, type ThemeId } from '../config/themes';
+import { THEME_IDS, defaultTheme, type ThemeId } from '../config/themes';
 import { installOrientationGuard, isTouchDevice } from './orientation';
 
 export interface MustikkaHyppyOptions {
@@ -62,8 +63,9 @@ export function createMustikkaHyppy(opts: MustikkaHyppyOptions): MustikkaHyppyIn
   const prefs = new LocalPrefs(settings.storagePrefix);
   const tempo: Tempo = settings.tempo && TEMPOS.includes(settings.tempo) ? settings.tempo : prefs.getTempo() ?? 'normal';
   if (settings.tempo) prefs.setTempo(tempo);
-  const theme: ThemeId = settings.theme && THEME_IDS.includes(settings.theme) ? settings.theme : prefs.getTheme() ?? 'doodle';
+  const theme: ThemeId = settings.theme && THEME_IDS.includes(settings.theme) ? settings.theme : prefs.getTheme() ?? defaultTheme();
   if (settings.theme) prefs.setTheme(theme);
+  applyUiTheme(theme);
 
   const ctx: GameContext = {
     settings,
@@ -118,7 +120,7 @@ export function createMustikkaHyppy(opts: MustikkaHyppyOptions): MustikkaHyppyIn
     parent: parentEl,
     width: Math.round(DESIGN_W * k),
     height: Math.round(DESIGN_H * k),
-    backgroundColor: '#faf7ef',
+    backgroundColor: COLORS.canvas,
     scale: {
       mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,

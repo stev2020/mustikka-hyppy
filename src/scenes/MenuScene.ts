@@ -11,7 +11,7 @@ import { normalizeVocabFile, type VocabFile } from '../vocab/types';
 import { Controls } from '../input/Controls';
 import { Background } from '../render/Background';
 import { tempoSelector } from '../render/tempoSelector';
-import { makeButton, makeText, panel, setupCamera, type Button } from '../render/ui';
+import { COLORS, fadeInCamera, fadeOutCamera, makeButton, makeText, panel, setupCamera, type Button } from '../render/ui';
 import { audioToggles } from '../render/audioToggles';
 import { VocabDeck } from '../vocab/VocabDeck';
 import { THEMES, THEME_IDS, type ThemeId } from '../config/themes';
@@ -39,7 +39,7 @@ export class MenuScene extends Phaser.Scene {
     this.tweens.add({ targets: title, y: 180, duration: 1600, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     const from = languageName(ctx.settings.direction === 'forward' ? ctx.meta.sourceLang ?? ctx.settings.sourceLang : ctx.meta.targetLang ?? ctx.settings.targetLang);
     const to = languageName(ctx.settings.direction === 'forward' ? ctx.meta.targetLang ?? ctx.settings.targetLang : ctx.meta.sourceLang ?? ctx.settings.sourceLang);
-    makeText(this, cx, 250, `Vokabel-Sprungspiel · ${from} → ${to}`, { size: 26, weight: 700, color: '#6b4a3a' }).setDepth(DEPTH.hud);
+    makeText(this, cx, 250, `Vokabel-Sprungspiel · ${from} → ${to}`, { size: 26, weight: 700, color: COLORS.subtitle }).setDepth(DEPTH.hud);
 
     // Highscore
     // Highscore + Lernstand
@@ -77,7 +77,7 @@ export class MenuScene extends Phaser.Scene {
     panel(this, 40, top, DESIGN_W - 80, 640, 34, 0.84).setDepth(DEPTH.hud);
     const ui = this.add.container(0, 0).setDepth(DEPTH.hud + 1);
     ui.add(tempoSelector(this, cx, top + 95, 580));
-    // Tageszeit-Wahl nur, wenn es mehr als ein Aussehen gibt (seit dem Kritzel-Look nicht mehr)
+    // Wahl Hell / Dunkel (nur, wenn es mehr als ein Aussehen gibt)
     const multiTheme = THEME_IDS.length > 1;
     if (multiTheme) ui.add(this.themeSelector(cx, top + 215, 580));
     const rowY = multiTheme ? top + 292 : top + 205;
@@ -93,11 +93,11 @@ export class MenuScene extends Phaser.Scene {
     const hint = touch
       ? 'Lenken: Pfeiltasten ← → oder A / D\noder links / rechts auf den Bildschirm tippen'
       : 'Lenken: ← → oder A / D · Pause: Esc · Ton: M\nLande auf der richtigen Übersetzung!';
-    ui.add(makeText(this, cx, top + (multiTheme ? 490 : 450), hint, { size: 22, weight: 600, strokeThickness: 0, color: '#4a4058' }));
+    ui.add(makeText(this, cx, top + (multiTheme ? 490 : 450), hint, { size: 22, weight: 600, strokeThickness: 0, color: COLORS.text2 }));
 
     // Wortliste wählen / importieren
     if (ctx.settings.allowImport) ui.add(this.listRow(cx, top + (multiTheme ? 580 : 560), 580));
-    else ui.add(makeText(this, cx, top + (multiTheme ? 580 : 560), `${ctx.entries.length} Vokabeln geladen`, { size: 18, weight: 600, strokeThickness: 0, color: '#857a9e' }));
+    else ui.add(makeText(this, cx, top + (multiTheme ? 580 : 560), `${ctx.entries.length} Vokabeln geladen`, { size: 18, weight: 600, strokeThickness: 0, color: COLORS.faint }));
 
     // eingebettet (z. B. im Satztrainer): zurück zur App
     if (ctx.onExit) {
@@ -107,13 +107,13 @@ export class MenuScene extends Phaser.Scene {
 
     this.input.keyboard?.once('keydown-ENTER', start);
     this.input.keyboard?.once('keydown-SPACE', start);
-    this.cameras.main.fadeIn(300, 250, 247, 239);
+    fadeInCamera(this, 300);
   }
 
-  /** Umschalter Abend / Tag */
+  /** Umschalter Hell / Dunkel */
   private themeSelector(x: number, y: number, width: number): Phaser.GameObjects.Container {
     const c = this.add.container(0, 0);
-    c.add(makeText(this, x, y - 52, 'Tageszeit', { size: 24, weight: 700, color: '#6b5f86', strokeThickness: 0 }));
+    c.add(makeText(this, x, y - 52, 'Aussehen', { size: 24, weight: 700, color: COLORS.muted, strokeThickness: 0 }));
     const bw = (width - 16) / 2;
     let busy = false;
     const choose = async (id: ThemeId) => {
@@ -244,7 +244,7 @@ export class MenuScene extends Phaser.Scene {
     } catch (e) {
       console.error(e);
       btn.setLabel('Fehler');
-      const msg = makeText(this, DESIGN_W / 2, 1255, `Import fehlgeschlagen: ${(e as Error).message}`, { size: 18, weight: 700, color: '#c8323c', strokeThickness: 3, wrapWidth: DESIGN_W - 60 }).setDepth(DEPTH.hud + 2);
+      const msg = makeText(this, DESIGN_W / 2, 1255, `Import fehlgeschlagen: ${(e as Error).message}`, { size: 18, weight: 700, color: COLORS.red, strokeThickness: 3, wrapWidth: DESIGN_W - 60 }).setDepth(DEPTH.hud + 2);
       this.time.delayedCall(5000, () => {
         msg.destroy();
         btn.setLabel('Import …');
@@ -268,7 +268,7 @@ export class MenuScene extends Phaser.Scene {
   }
 
   private startGame(): void {
-    this.cameras.main.fadeOut(220, 250, 247, 239);
+    fadeOutCamera(this, 220);
     this.cameras.main.once(Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE, () => this.scene.start('Game'));
   }
 

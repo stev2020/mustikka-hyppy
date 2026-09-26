@@ -154,13 +154,13 @@ export class Background {
     private scene: Phaser.Scene,
     private theme: Theme,
   ) {
-    this.sky = scene.add.tileSprite(0, 0, DESIGN_W, DESIGN_H, 'paper').setOrigin(0, 0).setScrollFactor(0).setDepth(DEPTH.sky);
+    this.sky = scene.add.tileSprite(0, 0, DESIGN_W, DESIGN_H, texKey('paper', theme.id)).setOrigin(0, 0).setScrollFactor(0).setDepth(DEPTH.sky);
 
     // Sterne
     const starCount = Math.round(SKY.starCount * theme.stars);
     for (let i = 0; i < starCount; i++) {
       // gekritzelte Sternchen (64 px), leicht schräg
-      const img = scene.add.image(0, 0, 'star').setScrollFactor(0).setDepth(DEPTH.stars).setAngle(-15 + Math.random() * 30);
+      const img = scene.add.image(0, 0, texKey('star', theme.id)).setScrollFactor(0).setDepth(DEPTH.stars).setAngle(-15 + Math.random() * 30);
       const scale = 0.26 + Math.pow(Math.random(), 2) * 0.26;
       this.stars.push({
         img,
@@ -193,7 +193,7 @@ export class Background {
     }
 
     if (theme.moon) {
-      this.moon = scene.add.image(DESIGN_W - 150, 150, SKY_ASSETS.moon).setScrollFactor(0).setDepth(DEPTH.moon);
+      this.moon = scene.add.image(DESIGN_W - 150, 150, texKey(SKY_ASSETS.moon, theme.id)).setScrollFactor(0).setDepth(DEPTH.moon);
       this.moon.setDisplaySize(SKY_ASSETS.moonDisplaySize, SKY_ASSETS.moonDisplaySize).setAlpha(0);
     }
     if (theme.sun) {

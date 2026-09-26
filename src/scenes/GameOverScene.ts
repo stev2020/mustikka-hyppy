@@ -30,11 +30,11 @@ export class GameOverScene extends Phaser.Scene {
     const learned = result.newlyKnown > 0 ? ` · ${result.newlyKnown} ${result.newlyKnown === 1 ? 'Wort' : 'Wörter'} neu gelernt` : '';
     const title = (result.endedBy === 'hearts' ? 'Keine Herzen mehr' : 'Abgestürzt!') + learned;
     L.add(makeText(this, cx, top + 70, 'Game Over', { size: 60, weight: 900 }));
-    L.add(makeText(this, cx, top + 128, title, { size: 26, weight: 600, color: '#6b5f86', strokeThickness: 0 }));
+    L.add(makeText(this, cx, top + 128, title, { size: 26, weight: 600, color: COLORS.muted, strokeThickness: 0 }));
 
     // Highscore
     if (result.newHighscore) {
-      const hs = makeText(this, cx, top + 292, result.previousHighscore > 0 ? `Neuer Highscore! (vorher ${result.previousHighscore})` : 'Neuer Highscore!', { size: 30, weight: 900, color: '#d17a00', strokeThickness: 6 });
+      const hs = makeText(this, cx, top + 292, result.previousHighscore > 0 ? `Neuer Highscore! (vorher ${result.previousHighscore})` : 'Neuer Highscore!', { size: 30, weight: 900, color: COLORS.orange, strokeThickness: 6 });
       L.add(hs);
       this.tweens.add({ targets: hs, scale: { from: 1, to: 1.08 }, duration: 500, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
       const sparks = this.add.particles(cx, top + 292, 'fx_dot', {
@@ -50,7 +50,7 @@ export class GameOverScene extends Phaser.Scene {
       sparks.setDepth(DEPTH.overlay + 2);
     } else {
       const best = ctx.prefs.getHighscore();
-      if (best && best.score > 0) L.add(makeText(this, cx, top + 292, `Highscore: ${best.score} Punkte`, { size: 24, weight: 700, color: '#d17a00', strokeThickness: 0 }));
+      if (best && best.score > 0) L.add(makeText(this, cx, top + 292, `Highscore: ${best.score} Punkte`, { size: 24, weight: 700, color: COLORS.orange, strokeThickness: 0 }));
     }
 
     const correct = result.answers.filter((a) => a.correct).length;
@@ -62,25 +62,25 @@ export class GameOverScene extends Phaser.Scene {
     stats.forEach(([v, l], i) => {
       const x = cx + (i - 1) * 200;
       L.add(makeText(this, x, top + 205, v, { size: 44, weight: 900 }));
-      L.add(makeText(this, x, top + 250, l, { size: 20, weight: 600, color: '#6b5f86', strokeThickness: 0 }));
+      L.add(makeText(this, x, top + 250, l, { size: 20, weight: 600, color: COLORS.muted, strokeThickness: 0 }));
     });
 
     // Liste der falsch beantworteten Wörter
     const listTop = top + 330;
     const g = this.add.graphics();
-    g.fillStyle(0x2b2230, 0.06);
+    g.fillStyle(COLORS.tint, COLORS.tintAlpha);
     g.fillRoundedRect(76, listTop, DESIGN_W - 152, 500, 22);
     L.add(g);
     if (wrong.length === 0) {
-      L.add(makeText(this, cx, listTop + 60, result.answers.length ? 'Alles richtig – stark!' : 'Noch keine Wörter beantwortet.', { size: 28, weight: 700, color: '#2f8a45' }));
+      L.add(makeText(this, cx, listTop + 60, result.answers.length ? 'Alles richtig – stark!' : 'Noch keine Wörter beantwortet.', { size: 28, weight: 700, color: COLORS.green }));
     } else {
-      L.add(makeText(this, cx, listTop + 38, 'Nochmal üben:', { size: 26, weight: 800, color: '#d17a00' }));
+      L.add(makeText(this, cx, listTop + 38, 'Nochmal üben:', { size: 26, weight: 800, color: COLORS.orange }));
       const maxRows = 8;
       wrong.slice(0, maxRows).forEach((w, i) => {
         const y = listTop + 92 + i * 48;
         const s = makeText(this, cx - 14, y, w.source, { size: 26, weight: 700 }).setOrigin(1, 0.5);
-        const dash = makeText(this, cx, y, '→', { size: 22, weight: 700, color: '#6b5f86', strokeThickness: 0 });
-        const t = makeText(this, cx + 14, y, w.target, { size: 26, weight: 800, color: '#2f8a45' }).setOrigin(0, 0.5);
+        const dash = makeText(this, cx, y, '→', { size: 22, weight: 700, color: COLORS.muted, strokeThickness: 0 });
+        const t = makeText(this, cx + 14, y, w.target, { size: 26, weight: 800, color: COLORS.green }).setOrigin(0, 0.5);
         fitText(s, 250, 26, 18);
         fitText(t, 250, 26, 18);
         L.add([s, dash, t]);

@@ -2,6 +2,7 @@ import type Phaser from 'phaser';
 import type { GameSettings, LocalPrefs } from '../config/settings';
 import type { Tempo } from '../config/tuning';
 import { THEMES, type ThemeId } from '../config/themes';
+import { applyUiTheme } from '../render/ui';
 import type { Sfx } from '../audio/Sfx';
 import type { Speech } from '../audio/Speech';
 import { LocalProgressStore, ProgressTracker, type ProgressStore } from '../vocab/Progress';
@@ -54,6 +55,7 @@ export function setTheme(scene: Phaser.Scene, t: ThemeId): void {
   const ctx = getCtx(scene);
   ctx.theme = t;
   ctx.prefs.setTheme(t);
+  applyUiTheme(t);
   applyPageBackground(ctx);
 }
 

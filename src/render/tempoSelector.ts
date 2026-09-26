@@ -1,13 +1,13 @@
 import Phaser from 'phaser';
 import { TEMPOS, TEMPO_LABELS, type Tempo } from '../config/tuning';
 import { getCtx, setTempo } from '../game/context';
-import { makeButton, makeText, type Button } from './ui';
+import { COLORS, makeButton, makeText, type Button } from './ui';
 
 /** Drei Knöpfe Langsam / Normal / Schnell, zentriert um x */
 export function tempoSelector(scene: Phaser.Scene, x: number, y: number, width = 600): Phaser.GameObjects.Container {
   const ctx = getCtx(scene);
   const c = scene.add.container(0, 0);
-  c.add(makeText(scene, x, y - 58, 'Tempo', { size: 26, weight: 700, color: '#6b5f86', strokeThickness: 0 }));
+  c.add(makeText(scene, x, y - 58, 'Tempo', { size: 26, weight: 700, color: COLORS.muted, strokeThickness: 0 }));
   const bw = (width - 2 * 16) / 3;
   const buttons: Button[] = [];
   const refresh = () => buttons.forEach((b, i) => b.setActive(TEMPOS[i] === getCtx(scene).tempo));

@@ -5,13 +5,49 @@ schnell hin und her gekritzelte Füllungen, leichte Überzeichnung am Ende.
 Alle Koordinaten in Bildpixeln des Ziel-Assets; intern 2-fach überabgetastet.
 """
 import math
+import os
 import cv2
 import numpy as np
 from PIL import Image
 
 S = 2
-INK = (38, 30, 44)
-PENCIL = (112, 106, 128)
+
+# Thema über Umgebungsvariable: DOODLE_THEME=night erzeugt die Nachtfassung
+# der Hintergründe (dunkles Karopapier, heller Gelstift) nach assets/night/.
+THEME = os.environ.get('DOODLE_THEME', 'doodle')
+if THEME not in ('doodle', 'night'):
+    raise SystemExit(f'Unbekanntes Thema: {THEME}')
+THEME_DIR = '' if THEME == 'doodle' else f'{THEME}/'
+
+PALETTES = {
+    # Filzstift auf hellem Karopapier
+    'doodle': dict(
+        ink=(38, 30, 44), pencil=(112, 106, 128), pencil_pale=(150, 146, 166),
+        paper=(250, 247, 239), grid=(178, 198, 216),
+        pine=(112, 168, 116), pine_pale=(160, 196, 162), grass=(120, 170, 110),
+        red=(214, 96, 84), sauna=(170, 118, 88), roof=(236, 238, 244), door=(150, 90, 70),
+        window=(250, 214, 120), smoke=(150, 150, 165),
+        water=(120, 160, 222), ripple=(84, 124, 196),
+        rock=(190, 186, 196), mountain=(200, 204, 222), hills=(206, 208, 228), snow=(255, 255, 255),
+        cloud=(255, 255, 255), cloud_shade=(200, 204, 222),
+        moon=(246, 220, 120), moon_dot=(222, 186, 86), star=(246, 206, 70), glow=(255, 214, 110),
+    ),
+    # Gelstift auf dunkelblauem Karopapier (Nachtheft)
+    'night': dict(
+        ink=(238, 234, 250), pencil=(176, 184, 226), pencil_pale=(120, 128, 180),
+        paper=(28, 32, 66), grid=(56, 68, 122),
+        pine=(70, 150, 124), pine_pale=(66, 104, 128), grass=(92, 156, 120),
+        red=(176, 70, 84), sauna=(140, 92, 88), roof=(196, 206, 236), door=(96, 64, 70),
+        window=(255, 214, 100), smoke=(130, 138, 180),
+        water=(64, 96, 190), ripple=(120, 150, 230),
+        rock=(104, 108, 148), mountain=(84, 92, 150), hills=(70, 78, 132), snow=(222, 230, 250),
+        cloud=(98, 108, 168), cloud_shade=(140, 150, 206),
+        moon=(255, 226, 120), moon_dot=(220, 184, 80), star=(255, 220, 90), glow=(255, 206, 96),
+    ),
+}
+PALETTE = PALETTES[THEME]
+INK = PALETTE['ink']
+PENCIL = PALETTE['pencil']
 
 
 class Rand:
